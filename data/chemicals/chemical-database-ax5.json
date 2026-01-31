@@ -1,0 +1,282 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-30",
+  "database_type": "chemical_glove_compatibility",
+  "chemicals": [
+    {
+      "chemical": "Acétone",
+      "cas": "67-64-1",
+      "category": "Solvant organique",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "SilverShield", "Viton"],
+      "breakthrough_time_minutes": 240,
+      "unsuitable_materials": ["Latex", "Vinyle", "Nitrile léger"],
+      "risk_level": "élevé",
+      "hazards": ["Inflammable", "Irritant cutané", "Absorption cutanée"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Méthanol",
+      "cas": "67-56-1",
+      "category": "Alcool",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "SilverShield", "Alcool polyvinylique"],
+      "breakthrough_time_minutes": 180,
+      "unsuitable_materials": ["Latex", "Vinyle", "PVC", "Nitrile"],
+      "risk_level": "élevé",
+      "hazards": ["Toxique", "Inflammable", "Absorption cutanée rapide"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Acide sulfurique 98%",
+      "cas": "7664-93-9",
+      "category": "Acide fort",
+      "recommended_glove": "Néoprène",
+      "material_options": ["Néoprène", "Nitrile épais", "Butyle"],
+      "breakthrough_time_minutes": 480,
+      "unsuitable_materials": ["Latex", "Vinyle"],
+      "risk_level": "critique",
+      "hazards": ["Corrosif", "Brûlures chimiques graves", "Réaction exothermique"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Toluène",
+      "cas": "108-88-3",
+      "category": "Hydrocarbure aromatique",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "SilverShield", "Viton"],
+      "breakthrough_time_minutes": 240,
+      "unsuitable_materials": ["Nitrile", "Latex", "Vinyle", "PVC"],
+      "risk_level": "élevé",
+      "hazards": ["Neurotoxique", "Inflammable", "Absorption cutanée"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Éthanol",
+      "cas": "64-17-5",
+      "category": "Alcool",
+      "recommended_glove": "Nitrile",
+      "material_options": ["Nitrile", "Butyle", "Néoprène"],
+      "breakthrough_time_minutes": 120,
+      "unsuitable_materials": ["Latex", "Vinyle"],
+      "risk_level": "modéré",
+      "hazards": ["Inflammable", "Irritant"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Hydroxyde de sodium 50%",
+      "cas": "1310-73-2",
+      "category": "Base forte",
+      "recommended_glove": "Néoprène",
+      "material_options": ["Néoprène", "Butyle", "Nitrile épais"],
+      "breakthrough_time_minutes": 360,
+      "unsuitable_materials": ["Latex", "Vinyle", "Nitrile léger"],
+      "risk_level": "élevé",
+      "hazards": ["Corrosif", "Brûlures chimiques"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Xylène",
+      "cas": "1330-20-7",
+      "category": "Hydrocarbure aromatique",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "Viton", "SilverShield"],
+      "breakthrough_time_minutes": 300,
+      "unsuitable_materials": ["Nitrile", "Latex", "Vinyle"],
+      "risk_level": "élevé",
+      "hazards": ["Neurotoxique", "Inflammable"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Formaldéhyde 37%",
+      "cas": "50-00-0",
+      "category": "Aldéhyde",
+      "recommended_glove": "Nitrile épais",
+      "material_options": ["Nitrile épais", "Butyle", "Néoprène"],
+      "breakthrough_time_minutes": 240,
+      "unsuitable_materials": ["Latex", "Vinyle", "Nitrile léger"],
+      "risk_level": "critique",
+      "hazards": ["Cancérigène", "Corrosif", "Sensibilisant"],
+      "osha_standard": "1910.1048",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Peroxyde d'hydrogène 30%",
+      "cas": "7722-84-1",
+      "category": "Agent oxydant",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "Nitrile épais", "Néoprène"],
+      "breakthrough_time_minutes": 180,
+      "unsuitable_materials": ["Latex", "Vinyle", "PVC"],
+      "risk_level": "élevé",
+      "hazards": ["Oxydant puissant", "Corrosif", "Brûlures"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Dichlorométhane",
+      "cas": "75-09-2",
+      "category": "Solvant chloré",
+      "recommended_glove": "SilverShield",
+      "material_options": ["SilverShield", "Viton", "Alcool polyvinylique"],
+      "breakthrough_time_minutes": 60,
+      "unsuitable_materials": ["Nitrile", "Latex", "Vinyle", "Néoprène"],
+      "risk_level": "critique",
+      "hazards": ["Cancérigène probable", "Neurotoxique", "Perméation rapide"],
+      "osha_standard": "1910.1052",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Acide chlorhydrique 37%",
+      "cas": "7647-01-0",
+      "category": "Acide fort",
+      "recommended_glove": "Nitrile épais",
+      "material_options": ["Nitrile épais", "Néoprène", "Butyle"],
+      "breakthrough_time_minutes": 360,
+      "unsuitable_materials": ["Latex", "Vinyle"],
+      "risk_level": "élevé",
+      "hazards": ["Corrosif", "Vapeurs irritantes"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Acide nitrique 70%",
+      "cas": "7697-37-2",
+      "category": "Acide fort oxydant",
+      "recommended_glove": "Viton",
+      "material_options": ["Viton", "Butyle", "SilverShield"],
+      "breakthrough_time_minutes": 240,
+      "unsuitable_materials": ["Latex", "Vinyle", "Nitrile", "Néoprène"],
+      "risk_level": "critique",
+      "hazards": ["Corrosif", "Oxydant", "Réaction violente avec organiques"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Essence (hydrocarbures)",
+      "cas": "8006-61-9",
+      "category": "Hydrocarbure aliphatique",
+      "recommended_glove": "Nitrile",
+      "material_options": ["Nitrile", "Butyle", "Viton"],
+      "breakthrough_time_minutes": 480,
+      "unsuitable_materials": ["Latex", "Vinyle"],
+      "risk_level": "modéré",
+      "hazards": ["Inflammable", "Irritant", "Dégraissant cutané"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Ammoniaque 25%",
+      "cas": "1336-21-6",
+      "category": "Base",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "Nitrile", "Néoprène"],
+      "breakthrough_time_minutes": 360,
+      "unsuitable_materials": ["Latex", "Vinyle"],
+      "risk_level": "élevé",
+      "hazards": ["Corrosif", "Irritant respiratoire"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    },
+    {
+      "chemical": "Phénol",
+      "cas": "108-95-2",
+      "category": "Composé aromatique",
+      "recommended_glove": "Butyle",
+      "material_options": ["Butyle", "Nitrile épais", "Néoprène"],
+      "breakthrough_time_minutes": 120,
+      "unsuitable_materials": ["Latex", "Vinyle", "Nitrile léger"],
+      "risk_level": "critique",
+      "hazards": ["Toxique", "Corrosif", "Absorption cutanée rapide et mortelle"],
+      "osha_standard": "1910.1000",
+      "en_norm": "EN 374-1:2016"
+    }
+  ],
+  "glove_materials": {
+    "Latex": {
+      "description": "Caoutchouc naturel",
+      "advantages": ["Confort", "Élasticité", "Coût faible"],
+      "disadvantages": ["Allergies", "Faible résistance chimique", "Perméation rapide"],
+      "typical_uses": ["Manipulation générale", "Non-chimique"],
+      "not_recommended_for": ["Solvants", "Huiles", "Graisses"]
+    },
+    "Nitrile": {
+      "description": "Caoutchouc synthétique (acrylonitrile-butadiène)",
+      "advantages": ["Résistance huiles/graisses", "Hypoallergénique", "Bonne dextérité"],
+      "disadvantages": ["Perméation solvants organiques", "Coût moyen"],
+      "typical_uses": ["Hydrocarbures", "Huiles", "Graisses", "Bases diluées"],
+      "not_recommended_for": ["Solvants polaires", "Cétones", "Esters"]
+    },
+    "Butyle": {
+      "description": "Caoutchouc butyle (isobutylène-isoprène)",
+      "advantages": ["Excellente résistance solvants polaires", "Imperméabilité gaz"],
+      "disadvantages": ["Faible dextérité", "Coût élevé", "Résistance mécanique moyenne"],
+      "typical_uses": ["Cétones", "Esters", "Alcools", "Acides/bases"],
+      "not_recommended_for": ["Hydrocarbures aliphatiques", "Huiles"]
+    },
+    "Néoprène": {
+      "description": "Polychloroprène",
+      "advantages": ["Polyvalent", "Résistance acides/bases", "Bonne résistance mécanique"],
+      "disadvantages": ["Coût moyen-élevé", "Moins flexible"],
+      "typical_uses": ["Acides", "Bases", "Alcools", "Phénols"],
+      "not_recommended_for": ["Solvants chlorés", "Hydrocarbures aromatiques"]
+    },
+    "Viton": {
+      "description": "Fluoroélastomère (FKM)",
+      "advantages": ["Excellente résistance chimique large spectre", "Haute température"],
+      "disadvantages": ["Coût très élevé", "Rigidité"],
+      "typical_uses": ["Solvants chlorés", "Aromatiques", "Acides concentrés"],
+      "not_recommended_for": ["Cétones", "Amines"]
+    },
+    "Butyle": {
+      "description": "Polyisobutylène",
+      "advantages": ["Excellente imperméabilité", "Résistance cétones/esters"],
+      "disadvantages": ["Faible résistance mécanique", "Coût élevé"],
+      "typical_uses": ["Cétones", "Esters", "Aldéhydes", "Acides forts"],
+      "not_recommended_for": ["Hydrocarbures aliphatiques"]
+    },
+    "SilverShield": {
+      "description": "Multicouche laminé (PE/EVOH/PE)",
+      "advantages": ["Protection large spectre", "Perméation très lente"],
+      "disadvantages": ["Usage unique", "Faible résistance mécanique", "Coût élevé"],
+      "typical_uses": ["Multi-produits", "Laboratoires", "Mélanges inconnus"],
+      "not_recommended_for": ["Manipulation lourde"]
+    },
+    "PVC": {
+      "description": "Polychlorure de vinyle",
+      "advantages": ["Résistance acides/bases diluées", "Coût faible"],
+      "disadvantages": ["Rigidité", "Faible résistance solvants"],
+      "typical_uses": ["Acides/bases diluées", "Manipulation générale"],
+      "not_recommended_for": ["Solvants organiques"]
+    }
+  },
+  "risk_levels": {
+    "critique": {
+      "color": "#EF4444",
+      "description": "Danger immédiat pour la vie ou la santé",
+      "action": "Port EPI obligatoire + HITL + procédure stricte"
+    },
+    "élevé": {
+      "color": "#F97316",
+      "description": "Risque grave avec exposition prolongée",
+      "action": "Port EPI obligatoire + supervision"
+    },
+    "modéré": {
+      "color": "#F59E0B",
+      "description": "Risque limité avec précautions",
+      "action": "Port EPI recommandé"
+    },
+    "faible": {
+      "color": "#10B981",
+      "description": "Risque minimal",
+      "action": "EPI selon contexte"
+    }
+  }
+}

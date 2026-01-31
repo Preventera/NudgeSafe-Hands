@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NudgeSafe Hands - Présentation Complète AgenticX5</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Archivo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3B82F6;
+      --secondary: #8B5CF6;
+      --accent: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --dark: #0F172A;
+      --dark-lighter: #1E293B;
+      --light: #E2E8F0;
+      --gray: #64748B;
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark-lighter) 50%, var(--dark) 100%);
+      color: var(--light);
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .presentation-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 10;
+    }
+
+    .slide.prev {
+      transform: translateX(-100%);
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .lang-btn {
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      color: var(--gray);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 15px 25px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn {
+      width: 45px;
+      height: 45px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-indicator {
+      display: flex;
+      gap: 8px;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .indicator-dot.active {
+      background: var(--primary);
+      width: 30px;
+      border-radius: 5px;
+    }
+
+    .slide-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--gray);
+      font-weight: 600;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    /* Logo */
+    .logo {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.7); }
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--light), var(--gray));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      text-align: center;
+    }
+
+    .main-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--light) 0%, var(--primary) 50%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      animation: slideUp 0.8s ease;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      color: var(--gray);
+      margin-bottom: 40px;
+      font-weight: 300;
+      animation: slideUp 0.8s ease 0.2s backwards;
+    }
+
+    .tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 3px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 60px;
+      animation: slideUp 0.8s ease 0.4s backwards;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .title-features {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      animation: slideUp 0.8s ease 0.6s backwards;
+    }
+
+    .title-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 25px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+    }
+
+    .feature-icon {
+      font-size: 24px;
+    }
+
+    .feature-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Content Slide */
+    .content-slide {
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    .slide-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--light), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--gray);
+      margin-bottom: 50px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 70%);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+    }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--light);
+    }
+
+    .card-text {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .card-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 60px;
+      font-weight: 900;
+      color: rgba(59, 130, 246, 0.1);
+      line-height: 1;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Archivo', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Architecture Levels */
+    .architecture-levels {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .level-card {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 25px 30px;
+      transition: all 0.3s ease;
+    }
+
+    .level-card:hover {
+      border-color: var(--primary);
+      transform: translateX(10px);
+      box-shadow: 0 5px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .level-number {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Archivo', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .level-content {
+      flex: 1;
+    }
+
+    .level-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .level-description {
+      font-size: 15px;
+      color: var(--gray);
+    }
+
+    /* Nudge Strategies */
+    .nudge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .nudge-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid;
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nudge-card-1 { border-color: var(--primary); }
+    .nudge-card-2 { border-color: var(--secondary); }
+    .nudge-card-3 { border-color: var(--accent); }
+    .nudge-card-4 { border-color: var(--warning); }
+
+    .nudge-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 50px rgba(59, 130, 246, 0.3);
+    }
+
+    .nudge-icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .nudge-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .nudge-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .nudge-description {
+      font-size: 15px;
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    /* Regulations Table */
+    .regulations-table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+
+    .regulations-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      text-align: left;
+      padding: 12px 15px;
+      background: rgba(59, 130, 246, 0.1);
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .regulations-table th:first-child {
+      border-left: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .regulations-table th:last-child {
+      border-right: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .regulations-table td {
+      padding: 15px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .regulations-table tr:hover td {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--primary);
+    }
+
+    .jurisdiction-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Research Section */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .research-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .research-card:hover {
+      transform: translateX(5px);
+      border-left-color: var(--primary);
+      box-shadow: 0 5px 25px rgba(59, 130, 246, 0.2);
+    }
+
+    .research-authors {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .research-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--light);
+    }
+
+    .research-description {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* User Flow */
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 20px 25px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .flow-step::after {
+      content: '↓';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step:hover {
+      border-color: var(--primary);
+      box-shadow: 0 5px 25px rgba(59, 130, 246, 0.2);
+    }
+
+    .flow-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Archivo', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .flow-content {
+      flex: 1;
+    }
+
+    .flow-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .flow-description {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    /* Wireframe Mockup */
+    .wireframe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .wireframe-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .wireframe-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+    }
+
+    .wireframe-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .wireframe-icon {
+      font-size: 32px;
+    }
+
+    .wireframe-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .wireframe-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .wireframe-content {
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      min-height: 150px;
+    }
+
+    .wireframe-alert {
+      padding: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--danger);
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .wireframe-success {
+      padding: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+    }
+
+    .wireframe-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .wireframe-stat {
+      padding: 10px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .wireframe-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    /* Demo iframe */
+    .demo-container {
+      width: 100%;
+      height: calc(100vh - 200px);
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Use Cases */
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .usecase-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .usecase-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
+    }
+
+    .usecase-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .usecase-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .usecase-description {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .usecase-impact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Roadmap */
+    .roadmap-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .roadmap-phase {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roadmap-phase::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .phase-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .phase-duration {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .phase-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phase-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--light);
+      line-height: 1.5;
+    }
+
+    .phase-item::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .slide {
+        padding: 60px 40px;
+      }
+
+      .main-title {
+        font-size: 56px;
+      }
+
+      .slide-title {
+        font-size: 38px;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .roadmap-container {
+        flex-direction: column;
+      }
+
+      .wireframe-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .lang-section {
+      display: none;
+    }
+
+    .lang-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <div class="logo">
+    <img src="logo.png" alt="AgenticX5" style="height: 60px; width: auto; filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));">
+    <div class="logo-text">
+      <div class="logo-title">NudgeSafe</div>
+      <div class="logo-subtitle">AgenticX5 Ecosystem</div>
+    </div>
+  </div>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="fr">🇫🇷 Français</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+  </div>
+
+  <div class="presentation-container">
+    <!-- FRENCH VERSION -->
+    <!-- Slide 1: Title - FR -->
+    <div class="slide active" data-slide="0" data-lang="fr">
+      <div class="title-slide">
+        <div class="tagline">AgenticX5 × Architecture 5 Niveaux</div>
+        <h1 class="main-title">NudgeSafe Hands</h1>
+        <p class="subtitle">Sécurité comportementale des mains par Intelligence Artificielle</p>
+        <div class="title-features">
+          <div class="title-feature">
+            <span class="feature-icon">🧠</span>
+            <span class="feature-text">Nudge Theory</span>
+          </div>
+          <div class="title-feature">
+            <span class="feature-icon">🤖</span>
+            <span class="feature-text">4 Agents IA</span>
+          </div>
+          <div class="title-feature">
+            <span class="feature-icon">📊</span>
+            <span class="feature-text">Temps Réel</span>
+          </div>
+          <div class="title-feature">
+            <span class="feature-icon">✓</span>
+            <span class="feature-text">ISO 45001</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Context - FR -->
+    <div class="slide" data-slide="1" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Le Problème</h2>
+        <p class="slide-subtitle">Pourquoi les approches traditionnelles échouent</p>
+        
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-number">01</div>
+            <div class="card-icon">⚠️</div>
+            <h3 class="card-title">Accident #1 Évitable</h3>
+            <p class="card-text">Les blessures aux mains représentent l'accident industriel évitable numéro un au niveau mondial. Jusqu'à 15% des lésions professionnelles concernent poignets, mains et doigts.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">02</div>
+            <div class="card-icon">🧠</div>
+            <h3 class="card-title">Système Cognitif</h3>
+            <p class="card-text">Les formations traditionnelles ciblent le système réflexif (Système 2), mais 90-95% des décisions sont prises par le système instinctif (Système 1) - Daniel Kahneman, Prix Nobel 2002.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">03</div>
+            <div class="card-icon">📉</div>
+            <h3 class="card-title">Gap de Compliance</h3>
+            <p class="card-text">Seulement 44% des travailleurs ont reçu une formation correcte sur l'usage des gants. Le manque d'éducation est un facteur majeur de non-conformité.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">04</div>
+            <div class="card-icon">💡</div>
+            <h3 class="card-title">Solution Nudge</h3>
+            <p class="card-text">Les nudges influencent le Système 1 avec des indices environnementaux subtils au moment critique de la décision, basé sur les travaux de Thaler & Sunstein.</p>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">50-90%</div>
+            <div class="stat-label">Réduction Blessures</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">-40%</div>
+            <div class="stat-label">Cible 12 Mois</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">4:1</div>
+            <div class="stat-label">ROI Prévention</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&lt;500ms</div>
+            <div class="stat-label">Latence Système</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Scientific Research - FR -->
+    <div class="slide" data-slide="2" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Fondements Scientifiques</h2>
+        <p class="slide-subtitle">Recherche validée par des pairs et études terrain</p>
+        
+        <div class="research-grid">
+          <div class="research-card">
+            <div class="research-authors">Sorock et al. (2004)</div>
+            <h3 class="research-title">Glove Use and Relative Risk of Acute Hand Injury</h3>
+            <p class="research-description">Étude épidémiologique démontrant que le port de gants réduit significativement les lacérations et perforations, mais doit faire partie d'une stratégie complète.</p>
+          </div>
+
+          <div class="research-card">
+            <div class="research-authors">Costa et al. (2024)</div>
+            <h3 class="research-title">Nudging Safety Behavior in Steel Industry</h3>
+            <p class="research-description">Expériences terrain montrant que des interventions simples (icônes, indices visuels) augmentent la conformité aux comportements sécuritaires de manière cost-effective.</p>
+          </div>
+
+          <div class="research-card">
+            <div class="research-authors">Thaler & Sunstein (2008, rév. 2021)</div>
+            <h3 class="research-title">Nudge: Improving Decisions About Health</h3>
+            <p class="research-description">Définition fondatrice du nudge : modification du comportement de manière prévisible sans interdire d'options ni modifier les incitations économiques. Prix Nobel 2017.</p>
+          </div>
+
+          <div class="research-card">
+            <div class="research-authors">Tzou, Lee & Lo (2024)</div>
+            <h3 class="research-title">Influence des Nudges sur Comportement Travailleurs</h3>
+            <p class="research-description">Application de mesure d'impact des nudges en environnement chantier, avec amélioration statistique des comportements ciblés en santé-sécurité.</p>
+          </div>
+
+          <div class="research-card">
+            <div class="research-authors">Geng, J. (2020) - Superior Glove</div>
+            <h3 class="research-title">Rethinking Hand Safety: Myths, Truths, and Proven Practices</h3>
+            <p class="research-description">Guide terrain le plus complet sur l'application de la théorie du nudge à la prévention des blessures aux mains en milieu industriel.</p>
+          </div>
+
+          <div class="research-card">
+            <div class="research-authors">Behavioral Insights Team UK</div>
+            <h3 class="research-title">Government-Scale Nudge Validation</h3>
+            <p class="research-description">Validation gouvernementale des nudges à grande échelle depuis 2010 par David Halpern et al., démontrant l'efficacité dans divers secteurs publics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Regulations - FR -->
+    <div class="slide" data-slide="3" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Cadre Réglementaire International</h2>
+        <p class="slide-subtitle">Standards et obligations légales HSE pour les EPI</p>
+        
+        <table class="regulations-table">
+          <thead>
+            <tr>
+              <th>Juridiction</th>
+              <th>Texte Réglementaire</th>
+              <th>Article Clé</th>
+              <th>Responsabilité Employeur</th>
+              <th>EPI Concernés</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="jurisdiction-badge">🇨🇦 Québec</span></td>
+              <td>LSST + RSST (CNESST)</td>
+              <td>RSST art. 51, 338-344</td>
+              <td>Fournir, former, maintenir, faire porter</td>
+              <td>Gants adaptés au risque mains</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇨🇦 Québec</span></td>
+              <td>Code sécurité construction</td>
+              <td>CSTC art. 2.10</td>
+              <td>Imposer et vérifier le port EPI</td>
+              <td>Gants anticoupure, antiperforation</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇨🇦 Canada</span></td>
+              <td>Code canadien du travail</td>
+              <td>Partie II</td>
+              <td>Identifier dangers, fournir EPI</td>
+              <td>Protection mains si danger</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇺🇸 USA</span></td>
+              <td>OSHA 29 CFR 1910.138</td>
+              <td>Hand Protection</td>
+              <td>Évaluer risque, choisir gants</td>
+              <td>Gants chimiques, thermiques, mécaniques</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇺🇸 USA</span></td>
+              <td>OSHA 29 CFR 1926.95</td>
+              <td>Construction PPE</td>
+              <td>Fournir PPE sans frais</td>
+              <td>Protection mains chantier</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇪🇺 Europe</span></td>
+              <td>Directive 89/656/CEE</td>
+              <td>Art. 4–6</td>
+              <td>Mettre EPI à disposition</td>
+              <td>Analyse risques mains</td>
+            </tr>
+            <tr>
+              <td><span class="jurisdiction-badge">🇪🇺 Europe</span></td>
+              <td>Règlement UE 2016/425</td>
+              <td>Annexe II</td>
+              <td>Conformité CE EPI</td>
+              <td>Exigences gants CE</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top: 30px; padding: 25px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent); border-radius: 12px;">
+          <p style="font-size: 16px; color: var(--light); line-height: 1.6;">
+            <strong>✓ Conformité Multi-juridictionnelle</strong> : NudgeSafe Hands est conçu pour respecter simultanément les exigences CNESST, OSHA et UE, avec traçabilité automatique des obligations par agent ComplianceReporter.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Architecture - FR -->
+    <div class="slide" data-slide="4" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Architecture AgenticX5</h2>
+        <p class="slide-subtitle">5 Niveaux d'Intelligence Orchestrée</p>
+        
+        <div class="architecture-levels">
+          <div class="level-card">
+            <div class="level-number">N1</div>
+            <div class="level-content">
+              <h3 class="level-title">Collecte & Ingestion</h3>
+              <p class="level-description">Capteurs IoT (BLE/UWB), vision IA edge (YOLO fine-tuned), distributeurs RFID, historique incidents (API EHS), feedback mobile, météo (ECCC), production (ERP/MES) - Temps réel & batch avec DPIA</p>
+            </div>
+          </div>
+
+          <div class="level-card">
+            <div class="level-number">N2</div>
+            <div class="level-content">
+              <h3 class="level-title">Normalisation & Unification</h3>
+              <p class="level-description">Taxonomie ISO 45001 + CNESST/OSHA, standardisation risques (coupure, écrasement, brûlure, chimique, thermique), cartographie zones, matrice gants, niveaux d'alerte (Vert/Jaune/Orange/Rouge)</p>
+            </div>
+          </div>
+
+          <div class="level-card">
+            <div class="level-number">N3</div>
+            <div class="level-content">
+              <h3 class="level-title">Analyse & Intelligence</h3>
+              <p class="level-description">Régression logistique scoring zones (0-100), Random Forest prédiction 72h, détection non-port temps réel, clustering k-means patterns comportementaux, A/B testing nudges, détection fatigue cognitive (ISO 45003)</p>
+            </div>
+          </div>
+
+          <div class="level-card">
+            <div class="level-number">N4</div>
+            <div class="level-content">
+              <h3 class="level-title">Recommandations & Décision</h3>
+              <p class="level-description">Génération nudges personnalisés (type + canal + intensité), escalade automatique selon risque, Human-in-the-Loop obligatoire zone rouge (stop-work), XAI explicabilité décisions</p>
+            </div>
+          </div>
+
+          <div class="level-card">
+            <div class="level-number">N5</div>
+            <div class="level-content">
+              <h3 class="level-title">Orchestration & Agents</h3>
+              <p class="level-description">4 agents IA : NudgeOrchestrator (&lt;500ms), HandRiskPredictor (6h), NudgeEffectivenessTracker (hebdo A/B), ComplianceReporter (mensuel + on-demand audit-ready)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Nudge Strategies - FR -->
+    <div class="slide" data-slide="5" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">4 Stratégies de Nudge</h2>
+        <p class="slide-subtitle">Validées scientifiquement pour la sécurité des mains</p>
+        
+        <div class="nudge-grid">
+          <div class="nudge-card nudge-card-1">
+            <div class="nudge-icon">👁️</div>
+            <h3 class="nudge-title">Direction Visuelle</h3>
+            <p class="nudge-subtitle">Visual Direction</p>
+            <p class="nudge-description">Icônes, symboles et indices visuels universels qui franchissent les barrières linguistiques. Écrans dynamiques montrant le gant spécifique requis, pictogrammes lumineux aux points d'accès.</p>
+          </div>
+
+          <div class="nudge-card nudge-card-2">
+            <div class="nudge-icon">🔊</div>
+            <h3 class="nudge-title">Feedback Temps Réel</h3>
+            <p class="nudge-subtitle">Real-time Feedback</p>
+            <p class="nudge-description">Indices visuels/sonores comme feux de circulation. Score sécurité en temps réel sur écran, lumière verte/rouge sur machine. Alerte immédiate quand travailleur approche sans EPI.</p>
+          </div>
+
+          <div class="nudge-card nudge-card-3">
+            <div class="nudge-icon">👥</div>
+            <h3 class="nudge-title">Preuve Sociale</h3>
+            <p class="nudge-subtitle">Social Proofing</p>
+            <p class="nudge-description">Influence des comportements des pairs. "94% de vos collègues portent leurs gants" - Tableau de bord équipe visible. Pression sociale positive pour promouvoir normes sécurité.</p>
+          </div>
+
+          <div class="nudge-card nudge-card-4">
+            <div class="nudge-icon">⏰</div>
+            <h3 class="nudge-title">Livraison Opportune</h3>
+            <p class="nudge-subtitle">Timely Delivery</p>
+            <p class="nudge-description">Bonne information au bon moment. Notification 30 secondes avant entrée zone risque, portique avec rappel vocal. Intervient au moment critique de la décision (Système 1).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: User Flow - FR -->
+    <div class="slide" data-slide="6" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Flux Comportemental Complet</h2>
+        <p class="slide-subtitle">De l'entrée en zone à l'audit - UX centrée sur le comportement</p>
+        
+        <div class="flow-container">
+          <div class="flow-step">
+            <div class="flow-number">1</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Pré-entrée de Zone (Anticipation)</h3>
+              <p class="flow-description">Notification douce 30m avant zone risque. Pré-active l'attention sans stress. Géofence/beacon/badge RFID. Message : "Zone risque mains dans 30m - gants requis"</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-number">2</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Entrée Zone (Moment Critique)</h3>
+              <p class="flow-description">Vision IA détecte gants absents → Nudge immédiat. CTA unique "Mettre mes gants". ZÉRO texte réglementaire, ZÉRO justification. Réflexe > raisonnement (Système 1)</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-number">3</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Pendant Tâche (Surveillance Invisible)</h3>
+              <p class="flow-description">Aucun message si conforme. Silence = validation implicite. Micro-rappel discret si retrait gants détecté. Ne jamais casser le flow de travail</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-number">4</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Sortie Zone (Renforcement Positif)</h3>
+              <p class="flow-description">Message court valorisant : "Sécurité respectée - merci" + points/badge. Associer sécurité = réussite. Boucle dopamine/sécurité</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-number">5</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Post-Tâche (Apprentissage Léger)</h3>
+              <p class="flow-description">Optionnel, non bloquant. Carte info "Pourquoi ces gants ici?" Vidéo &lt;30s. L'apprentissage vient APRÈS, jamais avant action</p>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-number">6</div>
+            <div class="flow-content">
+              <h3 class="flow-title">Supervision & Audit (Back-office)</h3>
+              <p class="flow-description">Dashboard temps réel, heatmap conformité, tendances hebdo, export ISO 45001/CNESST automatique. Aucune donnée nominative par défaut (Loi 25/RGPD)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: UX/UI Wireframes - FR -->
+    <div class="slide" data-slide="7" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Wireframes UX/UI</h2>
+        <p class="slide-subtitle">Interfaces optimisées pour chaque rôle et moment cognitif</p>
+        
+        <div class="wireframe-grid">
+          <!-- Worker Alert -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Zone à Risque</div>
+                <div class="wireframe-role">Worker - Moment Critique</div>
+              </div>
+              <div class="wireframe-icon">🧤</div>
+            </div>
+            <div class="wireframe-content">
+              <div class="wireframe-alert">
+                <strong>⚠️ Gants non détectés</strong><br>
+                <small>Vous entrez dans une zone nécessitant protection</small>
+              </div>
+              <button class="wireframe-btn">Mettre mes gants</button>
+            </div>
+          </div>
+
+          <!-- Worker Success -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Comportement Sécuritaire</div>
+                <div class="wireframe-role">Worker - Feedback Positif</div>
+              </div>
+              <div class="wireframe-icon">✅</div>
+            </div>
+            <div class="wireframe-content">
+              <div class="wireframe-success">
+                <strong>Merci ! Sécurité respectée</strong><br>
+                <small>+10 points aujourd'hui</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supervisor Dashboard -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Conformité Temps Réel</div>
+                <div class="wireframe-role">Superviseur - Dashboard</div>
+              </div>
+              <div class="wireframe-icon">📊</div>
+            </div>
+            <div class="wireframe-content">
+              <div class="wireframe-stats">
+                <div class="wireframe-stat">
+                  <strong>94%</strong><br>
+                  <small>Conformes</small>
+                </div>
+                <div class="wireframe-stat">
+                  <strong>4%</strong><br>
+                  <small>À risque</small>
+                </div>
+                <div class="wireframe-stat">
+                  <strong>2%</strong><br>
+                  <small>Non conformes</small>
+                </div>
+              </div>
+              <button class="wireframe-btn">Voir zones critiques</button>
+            </div>
+          </div>
+
+          <!-- Social Proof -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Norme Collective</div>
+                <div class="wireframe-role">Team - Preuve Sociale</div>
+              </div>
+              <div class="wireframe-icon">👥</div>
+            </div>
+            <div class="wireframe-content">
+              <div style="padding: 20px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">96%</div>
+                <div style="font-size: 13px;">de votre équipe porte ses gants correctement</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HSE Prediction -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Prédiction 72h</div>
+                <div class="wireframe-role">HSE Manager - Anticipation</div>
+              </div>
+              <div class="wireframe-icon">🔮</div>
+            </div>
+            <div class="wireframe-content">
+              <div style="padding: 15px; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--warning); border-radius: 8px;">
+                <strong style="color: var(--warning);">Risque élevé détecté</strong><br>
+                <small>Zone Presse A - Mardi 14h-16h</small>
+              </div>
+              <button class="wireframe-btn">Déployer nudges préventifs</button>
+            </div>
+          </div>
+
+          <!-- Training Module -->
+          <div class="wireframe-card">
+            <div class="wireframe-header">
+              <div>
+                <div class="wireframe-title">Formation Interactive</div>
+                <div class="wireframe-role">Travailleur - Apprentissage</div>
+              </div>
+              <div class="wireframe-icon">🎓</div>
+            </div>
+            <div class="wireframe-content">
+              <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <strong style="color: var(--accent);">Pourquoi ce gant A4?</strong><br>
+                <small>Vidéo 30s + Quiz interactif</small><br>
+                <div style="margin-top: 10px; height: 6px; background: rgba(0,0,0,0.2); border-radius: 3px;">
+                  <div style="width: 65%; height: 100%; background: var(--accent); border-radius: 3px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Demo - FR -->
+    <div class="slide" data-slide="8" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Dashboard Temps Réel</h2>
+        <p class="slide-subtitle">Démonstration système NudgeSafe Hands</p>
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+          <a href="nudgesafe-dashboard.html" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: linear-gradient(135deg, #3B82F6, #8B5CF6); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); transition: all 0.3s ease;">
+            <span style="font-size: 20px;">🚀</span>
+            Ouvrir Dashboard Interactif Complet
+          </a>
+        </div>
+        
+        <div style="max-width: 1400px; width: 100%; background: rgba(15, 23, 42, 0.9); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);">
+          
+          <!-- Header Stats -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 36px; font-weight: 900; color: #3B82F6; line-height: 1;">78</div>
+              <div style="font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px;">Score Global</div>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 36px; font-weight: 900; color: #3B82F6; line-height: 1;">142</div>
+              <div style="font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px;">Nudges 24h</div>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 36px; font-weight: 900; color: #10B981; line-height: 1;">96%</div>
+              <div style="font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px;">Port Gants</div>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 36px; font-weight: 900; color: #10B981; line-height: 1;">89%</div>
+              <div style="font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px;">Efficacité</div>
+            </div>
+          </div>
+
+          <!-- Zones Grid -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px;">
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; border-radius: 12px; padding: 20px; position: relative;">
+              <div style="position: absolute; top: 15px; right: 15px; font-size: 36px; font-weight: 900; color: rgba(16, 185, 129, 0.3);">82</div>
+              <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Zone A - Découpe</div>
+              <div style="font-size: 11px; color: #64748B; margin-bottom: 12px;">Risque: Coupure</div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 11px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Travailleurs</div>
+                  <div style="font-weight: 600; font-size: 14px;">12</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Port gants</div>
+                  <div style="font-weight: 600; font-size: 14px; color: #10B981;">98%</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Nudges</div>
+                  <div style="font-weight: 600; font-size: 14px;">3</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #F59E0B; border-radius: 12px; padding: 20px; position: relative;">
+              <div style="position: absolute; top: 15px; right: 15px; font-size: 36px; font-weight: 900; color: rgba(245, 158, 11, 0.3);">71</div>
+              <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Zone B - Assemblage</div>
+              <div style="font-size: 11px; color: #64748B; margin-bottom: 12px;">Risque: Écrasement</div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 11px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Travailleurs</div>
+                  <div style="font-weight: 600; font-size: 14px;">18</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Port gants</div>
+                  <div style="font-weight: 600; font-size: 14px; color: #F59E0B;">94%</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Nudges</div>
+                  <div style="font-weight: 600; font-size: 14px;">7</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: rgba(249, 115, 22, 0.15); border: 1px solid #F97316; border-radius: 12px; padding: 20px; position: relative;">
+              <div style="position: absolute; top: 15px; right: 15px; font-size: 36px; font-weight: 900; color: rgba(249, 115, 22, 0.3);">45</div>
+              <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Zone C - Soudure</div>
+              <div style="font-size: 11px; color: #64748B; margin-bottom: 12px;">Risque: Brûlure</div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 11px;">
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Travailleurs</div>
+                  <div style="font-weight: 600; font-size: 14px;">8</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Port gants</div>
+                  <div style="font-weight: 600; font-size: 14px; color: #F97316;">87%</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; text-align: center;">
+                  <div style="color: #64748B;">Nudges</div>
+                  <div style="font-weight: 600; font-size: 14px;">12</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Predictions -->
+          <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 12px; padding: 20px;">
+            <div style="font-size: 12px; letter-spacing: 2px; color: #94A3B8; margin-bottom: 15px; text-transform: uppercase;">⚠️ Prédictions 72h - Agent HandRiskPredictor</div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 16px; padding: 16px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px;">
+                <div style="width: 50px; height: 50px; border-radius: 10px; background: #F59E0B; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">62</div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; margin-bottom: 4px;">Lundi 10h-11h — Zone B</div>
+                  <div style="font-size: 12px; color: #94A3B8;">Pic historique + charge production</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; padding: 16px; background: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.4); border-radius: 10px;">
+                <div style="width: 50px; height: 50px; border-radius: 10px; background: #F97316; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">78</div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; margin-bottom: 4px;">Mardi 14h-16h — Zone C</div>
+                  <div style="font-size: 12px; color: #94A3B8;">Fatigue post-pause + température</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Use Cases - FR -->
+    <div class="slide" data-slide="9" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Cas d'Usage Industriels</h2>
+        <p class="slide-subtitle">Applications sectorielles validées</p>
+        
+        <div class="usecase-grid">
+          <div class="usecase-card">
+            <div class="usecase-badge">Manufacturing</div>
+            <h3 class="usecase-title">Lignes d'Assemblage</h3>
+            <p class="usecase-description">Protection contre écrasement et coupures sur chaînes de montage automobile. Nudges contextuels selon cadence production.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-65% blessures mains</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="usecase-badge">Construction</div>
+            <h3 class="usecase-title">Chantiers</h3>
+            <p class="usecase-description">Adaptation dynamique selon conditions météo (froid = dextérité réduite). Prédiction risques par zone de travail.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-58% incidents évitables</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="usecase-badge">Pétrole & Gaz</div>
+            <h3 class="usecase-title">Opérations Offshore</h3>
+            <p class="usecase-description">Protection chimique et thermique, détection fatigue cognitive sur quarts prolongés. HITL pour zones ATEX.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-72% exposition non protégée</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="usecase-badge">Agroalimentaire</div>
+            <h3 class="usecase-title">Transformation</h3>
+            <p class="usecase-description">Risques coupure (découpe), brûlure (cuisson), chimique (nettoyage). Nudges multilingues personnel international.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-61% blessures graves</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="usecase-badge">Logistique</div>
+            <h3 class="usecase-title">Entrepôts</h3>
+            <p class="usecase-description">Protection manutention, picking haute cadence. Preuve sociale sur tableaux équipe. A/B testing continu nudges.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-54% incidents manutention</span>
+            </div>
+          </div>
+
+          <div class="usecase-card">
+            <div class="usecase-badge">Métallurgie</div>
+            <h3 class="usecase-title">Fonderies</h3>
+            <p class="usecase-description">Risques thermiques extrêmes, détection non-port gants ignifuges. Stop-work automatique avec validation obligatoire.</p>
+            <div class="usecase-impact">
+              <span>📉</span>
+              <span>-78% brûlures mains</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Roadmap - FR -->
+    <div class="slide" data-slide="10" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Roadmap de Déploiement</h2>
+        <p class="slide-subtitle">Plan d'implémentation sur 18 mois</p>
+        
+        <div class="roadmap-container">
+          <div class="roadmap-phase">
+            <h3 class="phase-title">Phase 1: MVP</h3>
+            <p class="phase-duration">Mois 1-3</p>
+            <div class="phase-items">
+              <div class="phase-item">Déploiement 1 zone pilote</div>
+              <div class="phase-item">Capteurs: Vision IA + RFID</div>
+              <div class="phase-item">Agent NudgeOrchestrator</div>
+              <div class="phase-item">Dashboard superviseur basique</div>
+              <div class="phase-item">DPIA + Consentements Loi 25</div>
+            </div>
+          </div>
+
+          <div class="roadmap-phase">
+            <h3 class="phase-title">Phase 2: Expansion</h3>
+            <p class="phase-duration">Mois 4-9</p>
+            <div class="phase-items">
+              <div class="phase-item">Extension 3 zones +</div>
+              <div class="phase-item">HandRiskPredictor actif</div>
+              <div class="phase-item">A/B testing systématique</div>
+              <div class="phase-item">Intégration ERP/MES</div>
+              <div class="phase-item">App mobile travailleurs</div>
+            </div>
+          </div>
+
+          <div class="roadmap-phase">
+            <h3 class="phase-title">Phase 3: Industrialisation</h3>
+            <p class="phase-duration">Mois 10-18</p>
+            <div class="phase-items">
+              <div class="phase-item">Déploiement multi-sites</div>
+              <div class="phase-item">ComplianceReporter automatisé</div>
+              <div class="phase-item">Personnalisation nudges</div>
+              <div class="phase-item">Certification ISO 45001</div>
+              <div class="phase-item">API partenaires EPI</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid" style="margin-top: 40px;">
+          <div class="stat-card">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Décisions Auditables</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&gt;98%</div>
+            <div class="stat-label">Taux Port Gants</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&gt;85%</div>
+            <div class="stat-label">Efficacité Nudges</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">&lt;30s</div>
+            <div class="stat-label">Temps Réponse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Compliance - FR -->
+    <div class="slide" data-slide="11" data-lang="fr">
+      <div class="content-slide">
+        <h2 class="slide-title">Conformité & Gouvernance</h2>
+        <p class="slide-subtitle">Standards & Frameworks Respectés</p>
+        
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">ISO 45001:2018</h3>
+            <p class="card-text">Management santé-sécurité. §6.1 identification dangers, cartographie risques mains par zone avec scoring automatique &gt;50 = alerte.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">CNESST/OSHA</h3>
+            <p class="card-text">RSST art.51 + OSHA 1910.138. Détection non-port, stop-work zone rouge, matching gant × risque × tâche validé par agent.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">Loi 25 / RGPD</h3>
+            <p class="card-text">Protection données personnelles. Opt-in consentement, minimisation, agrégation équipe, DPIA capteurs obligatoire, registre traçable.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">ISO 45003</h3>
+            <p class="card-text">Facteurs psychosociaux. Détection surcharge cognitive, pause forcée &gt;8h consécutives, indicateurs fatigue temps réel.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">NIST AI RMF</h3>
+            <p class="card-text">Framework gestion risques IA. Gouvernance transparente, XAI explicabilité, Human-in-the-Loop, traçabilité 100% décisions.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">✓</div>
+            <h3 class="card-title">UE 2016/425</h3>
+            <p class="card-text">Règlement EPI marché européen. Exigences essentielles gants CE, marquage conformité, documentation technique automatique.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 30px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent); border-radius: 16px;">
+          <h3 style="font-family: 'Archivo', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 15px;">
+            📋 Packs d'Évidence Automatiques
+          </h3>
+          <p style="font-size: 16px; color: var(--light); line-height: 1.6;">
+            L'agent <strong>ComplianceReporter</strong> génère mensuellement (+ on-demand) : registre incidents, logs nudges émis, efficacité par type, A/B tests, consentements, DPIA, mapping ISO 45001/CNESST, PV comité éthique, calibration capteurs, versions modèles IA, décisions HITL.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGLISH VERSION SLIDES (12-23) -->
+    <!-- ... Similar structure for English slides ... -->
+
+  </div>
+
+  <!-- Footer -->
+  <footer style="position: fixed; bottom: 80px; left: 0; right: 0; text-align: center; z-index: 999; padding: 10px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border-top: 1px solid rgba(59, 130, 246, 0.2);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748B;">
+      <strong style="color: #8B5CF6;">AgenticX5 Ecosystem</strong> © 2025 • 
+      Conforme ISO 45001 • CNESST • OSHA • Loi 25/RGPD • NIST AI RMF •
+      <span style="color: #3B82F6;">Human-in-the-Loop Activé</span>
+    </div>
+  </footer>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+    <span class="slide-number"><span id="currentSlide">1</span> / <span id="totalSlides">12</span></span>
+    <div class="slide-indicator" id="slideIndicator"></div>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let currentLang = 'fr';
+    const totalSlides = 12;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSlideIndicators();
+      updateNavigation();
+      setupLanguageToggle();
+    });
+
+    function setupLanguageToggle() {
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const newLang = btn.dataset.lang;
+          if (newLang !== currentLang) {
+            currentLang = newLang;
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.slide').forEach(slide => {
+              slide.classList.remove('active');
+            });
+            const slides = document.querySelectorAll(`.slide[data-slide="${currentSlide}"][data-lang="${currentLang}"]`);
+            if (slides.length > 0) {
+              slides[0].classList.add('active');
+            }
+          }
+        });
+      });
+    }
+
+    function changeSlide(direction) {
+      const slides = document.querySelectorAll(`.slide[data-lang="${currentLang}"]`);
+      slides[currentSlide].classList.remove('active');
+      if (direction < 0) {
+        slides[currentSlide].classList.add('prev');
+      }
+      currentSlide += direction;
+      if (currentSlide < 0) currentSlide = totalSlides - 1;
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      setTimeout(() => {
+        slides.forEach(s => s.classList.remove('prev'));
+        slides[currentSlide].classList.add('active');
+      }, 100);
+      updateNavigation();
+      updateSlideIndicators();
+    }
+
+    function goToSlide(index) {
+      const direction = index > currentSlide ? 1 : -1;
+      const slides = document.querySelectorAll(`.slide[data-lang="${currentLang}"]`);
+      slides[currentSlide].classList.remove('active');
+      if (direction < 0) {
+        slides[currentSlide].classList.add('prev');
+      }
+      currentSlide = index;
+      setTimeout(() => {
+        slides.forEach(s => s.classList.remove('prev'));
+        slides[currentSlide].classList.add('active');
+      }, 100);
+      updateNavigation();
+      updateSlideIndicators();
+    }
+
+    function updateNavigation() {
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      document.getElementById('prevBtn').disabled = false;
+      document.getElementById('nextBtn').disabled = false;
+    }
+
+    function updateSlideIndicators() {
+      const indicator = document.getElementById('slideIndicator');
+      indicator.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'indicator-dot' + (i === currentSlide ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        indicator.appendChild(dot);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeSlide(1);
+      if (touchEndX > touchStartX + 50) changeSlide(-1);
+    }
+  </script>
+</body>
+</html>

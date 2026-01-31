@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenAISafety Glove Selector × NudgeSafe Hands</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+      color: #E2E8F0;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-logo {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .header-title h1 {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #E2E8F0, #3B82F6, #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .header-title p {
+      font-size: 12px;
+      color: #64748B;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid #10B981;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #10B981;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .header-stats {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #94A3B8;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.3s ease;
+      animation: slideIn 0.6s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .card-icon {
+      font-size: 24px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #3B82F6;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      color: #E2E8F0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+    }
+
+    .analyze-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Archivo', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .analyze-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+    }
+
+    .analyze-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 2px solid;
+      animation: slideIn 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .result-box.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: #10B981;
+    }
+
+    .result-box.success::before {
+      background: #10B981;
+    }
+
+    .result-box.warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #F59E0B;
+    }
+
+    .result-box.warning::before {
+      background: #F59E0B;
+    }
+
+    .result-box.danger {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: #EF4444;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .result-box.danger::before {
+      background: #EF4444;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-icon {
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    .result-title {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .result-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-item {
+      margin-bottom: 18px;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    .result-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .result-value {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .materials-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .material-chip {
+      padding: 6px 12px;
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .material-chip.unsuitable {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.5);
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .nudge-alert {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.7;
+      border-left: 4px solid;
+    }
+
+    .result-box.success .nudge-alert {
+      border-color: #10B981;
+    }
+
+    .result-box.warning .nudge-alert {
+      border-color: #F59E0B;
+    }
+
+    .result-box.danger .nudge-alert {
+      border-color: #EF4444;
+    }
+
+    .database-section {
+      grid-column: 1 / -1;
+    }
+
+    .chemicals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .chemical-card {
+      padding: 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .chemical-card:hover {
+      border-color: #3B82F6;
+      transform: translateY(-4px);
+      box-shadow: 0 6px 25px rgba(59, 130, 246, 0.25);
+    }
+
+    .chemical-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #E2E8F0;
+    }
+
+    .chemical-cas {
+      font-size: 11px;
+      color: #64748B;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 10px;
+    }
+
+    .risk-tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .risk-tag.critique {
+      background: rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .risk-tag.élevé {
+      background: rgba(245, 158, 11, 0.2);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .risk-tag.modéré {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3B82F6;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 25px;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #64748B;
+    }
+
+    footer strong {
+      color: #8B5CF6;
+    }
+
+    @media (max-width: 968px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <div class="header-logo">🧪</div>
+        <div class="header-title">
+          <h1>GenAISafety Glove Selector</h1>
+          <p>AgenticX5 × Sélection Intelligente EPI</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-badge">✓ Agent N4 Actif</div>
+        <div class="header-stats">15 Produits chimiques • 8 Matériaux • Conforme OSHA/EN 374</div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-grid">
+      <!-- Analysis Form -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">📋</span>
+          <span class="card-title">Analyse de Tâche & Risque</span>
+        </div>
+
+        <form id="analysisForm">
+          <div class="form-group">
+            <label class="form-label">Nom de la tâche</label>
+            <input type="text" class="form-input" id="taskInput" placeholder="Ex: Nettoyage de cuve de stockage" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Produit chimique manipulé</label>
+            <select class="form-select" id="chemicalInput" required>
+              <option value="">-- Sélectionner un produit --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Durée d'exposition estimée (min)</label>
+            <input type="number" class="form-input" id="durationInput" placeholder="Ex: 45" min="5" max="480" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Gant actuellement utilisé (optionnel)</label>
+            <select class="form-select" id="currentGloveInput">
+              <option value="">-- Aucun / Je ne sais pas --</option>
+              <option value="latex">Latex</option>
+              <option value="nitrile">Nitrile</option>
+              <option value="nitrile épais">Nitrile épais</option>
+              <option value="butyle">Butyle</option>
+              <option value="néoprène">Néoprène</option>
+              <option value="vinyle">Vinyle</option>
+              <option value="PVC">PVC</option>
+              <option value="SilverShield">SilverShield / Laminé</option>
+              <option value="Viton">Viton</option>
+            </select>
+          </div>
+
+          <button type="submit" class="analyze-btn">🔬 Analyser & Recommander</button>
+        </form>
+
+        <!-- Result Box -->
+        <div id="resultBox" class="result-box"></div>
+      </div>
+
+      <!-- Info Panel -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">💡</span>
+          <span class="card-title">Intelligence & Normes</span>
+        </div>
+
+        <div style="font-size: 14px; line-height: 1.8; color: #94A3B8;">
+          <p style="margin-bottom: 16px;">
+            <strong style="color: #3B82F6; font-size: 16px;">🧠 Architecture AgenticX5</strong>
+          </p>
+          <p style="margin-bottom: 20px;">
+            Ce module s'intègre dans l'architecture à 5 niveaux :
+          </p>
+          
+          <div style="padding: 12px; background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3B82F6; border-radius: 6px; margin-bottom: 16px;">
+            <strong style="color: #3B82F6;">N3 - Analyse & Intelligence</strong><br>
+            <span style="font-size: 13px;">Base de données compatibilité chimique × matériaux EPI</span>
+          </div>
+
+          <div style="padding: 12px; background: rgba(139, 92, 246, 0.1); border-left: 3px solid #8B5CF6; border-radius: 6px; margin-bottom: 16px;">
+            <strong style="color: #8B5CF6;">N4 - Recommandations & Décision</strong><br>
+            <span style="font-size: 13px;">Sélection optimale + nudging comportemental adaptatif</span>
+          </div>
+
+          <div style="padding: 12px; background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10B981; border-radius: 6px; margin-bottom: 20px;">
+            <strong style="color: #10B981;">N5 - Orchestration</strong><br>
+            <span style="font-size: 13px;">Logs traçables pour audit ISO 45001 / OSHA</span>
+          </div>
+
+          <p style="margin-bottom: 12px;">
+            <strong style="color: #F59E0B;">⚠️ Niveaux d'alerte :</strong>
+          </p>
+          <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+            <li><strong style="color: #10B981;">🟢 Vert :</strong> Gant adapté - Continuez</li>
+            <li><strong style="color: #F59E0B;">🟠 Orange :</strong> Attention requise</li>
+            <li><strong style="color: #EF4444;">🔴 Rouge :</strong> Danger - Changement obligatoire</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chemical Database -->
+      <div class="card database-section">
+        <div class="card-header">
+          <span class="card-icon">📚</span>
+          <span class="card-title">Base de Données - Compatibilité Chimique</span>
+        </div>
+
+        <div class="chemicals-grid" id="chemicalsGrid"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <strong>GenAISafety × NudgeSafe Hands</strong> | AgenticX5 Ecosystem © 2025<br>
+      Conforme OSHA 29 CFR 1910.138 • EN 374-1:2016 • EN 388 • ISO 45001:2018
+    </footer>
+  </div>
+
+  <script>
+    // Chemical Compatibility Database - AgenticX5 N3 Layer
+    const chemicalDB = [
+      {
+        chemical: "Acétone",
+        cas: "67-64-1",
+        recommended_glove: "Butyle",
+        material_options: ["Butyle", "SilverShield", "Viton"],
+        breakthrough_time_minutes: 240,
+        unsuitable_materials: ["Latex", "Vinyle", "Nitrile léger", "PVC"],
+        risk_level: "élevé",
+        hazard_info: "Solvant organique inflammable. Perméation rapide dans nitrile standard."
+      },
+      {
+        chemical: "Méthanol",
+        cas: "67-56-1",
+        recommended_glove: "Butyle",
+        material_options: ["Butyle", "SilverShield", "Alcool polyvinylique"],
+        breakthrough_time_minutes: 180,
+        unsuitable_materials: ["Latex", "Vinyle", "PVC", "Nitrile"],
+        risk_level: "élevé",
+        hazard_info: "Alcool toxique. Absorption cutanée rapide, risque systémique."
+      },
+      {
+        chemical: "Acide sulfurique 98%",
+        cas: "7664-93-9",
+        recommended_glove: "Néoprène",
+        material_options: ["Néoprène", "Nitrile épais", "Butyle"],
+        breakthrough_time_minutes: 480,
+        unsuitable_materials: ["Latex", "Vinyle", "Nitrile léger"],
+        risk_level: "critique",
+        hazard_info: "Acide fort corrosif. Brûlures chimiques graves, destruction tissulaire."
+      },
+      {
+        chemical: "Toluène",
+        cas: "108-88-3",
+        recommended_glove: "Butyle",
+        material_options: ["Butyle", "SilverShield", "Viton"],
+        breakthrough_time_minutes: 240,
+        unsuitable_materials: ["Nitrile", "Latex", "Vinyle", "PVC"],
+        risk_level: "élevé",
+        hazard_info: "Solvant aromatique neurotoxique. Absorption cutanée importante."
+      },
+      {
+        chemical: "Éthanol",
+        cas: "64-17-5",
+        recommended_glove: "Nitrile",
+        material_options: ["Nitrile", "Butyle", "Néoprène"],
+        breakthrough_time_minutes: 180,
+        unsuitable_materials: ["Latex", "Vinyle"],
+        risk_level: "modéré",
+        hazard_info: "Alcool inflammable. Dessèchement cutané, irritation."
+      },
+      {
+        chemical: "Hydroxyde de sodium 50%",
+        cas: "1310-73-2",
+        recommended_glove: "Néoprène",
+        material_options: ["Néoprène", "Butyle", "Nitrile épais"],
+        breakthrough_time_minutes: 360,
+        unsuitable_materials: ["Latex", "Vinyle"],
+        risk_level: "élevé",
+        hazard_info: "Base forte corrosive. Brûlures alcalines profondes."
+      },
+      {
+        chemical: "Xylène",
+        cas: "1330-20-7",
+        recommended_glove: "Butyle",
+        material_options: ["Butyle", "Viton", "SilverShield"],
+        breakthrough_time_minutes: 300,
+        unsuitable_materials: ["Nitrile", "Latex", "Vinyle", "PVC"],
+        risk_level: "élevé",
+        hazard_info: "Solvant aromatique. Neurotoxique, inflammable."
+      },
+      {
+        chemical: "Acide chlorhydrique 37%",
+        cas: "7647-01-0",
+        recommended_glove: "Néoprène",
+        material_options: ["Néoprène", "PVC", "Nitrile épais"],
+        breakthrough_time_minutes: 360,
+        unsuitable_materials: ["Latex", "Vinyle", "Nitrile léger"],
+        risk_level: "élevé",
+        hazard_info: "Acide fort corrosif. Vapeurs irritantes."
+      }
+    ];
+
+    // Populate chemicals select and grid
+    function init() {
+      const select = document.getElementById('chemicalInput');
+      const grid = document.getElementById('chemicalsGrid');
+
+      chemicalDB.forEach(chem => {
+        // Populate select
+        const option = document.createElement('option');
+        option.value = chem.chemical;
+        option.textContent = `${chem.chemical} (${chem.cas})`;
+        select.appendChild(option);
+
+        // Populate grid
+        const card = document.createElement('div');
+        card.className = 'chemical-card';
+        card.onclick = () => selectChemical(chem.chemical);
+        card.innerHTML = `
+          <div class="chemical-name">${chem.chemical}</div>
+          <div class="chemical-cas">CAS: ${chem.cas}</div>
+          <div class="risk-tag ${chem.risk_level}">${chem.risk_level}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function selectChemical(name) {
+      document.getElementById('chemicalInput').value = name;
+      document.getElementById('taskInput').focus();
+    }
+
+    // Form submission - AgenticX5 N4 Decision Layer
+    document.getElementById('analysisForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      analyzeAndRecommend();
+    });
+
+    function analyzeAndRecommend() {
+      const task = document.getElementById('taskInput').value;
+      const chemical = document.getElementById('chemicalInput').value;
+      const duration = parseInt(document.getElementById('durationInput').value);
+      const currentGlove = document.getElementById('currentGloveInput').value;
+
+      const chemData = chemicalDB.find(c => c.chemical === chemical);
+      if (!chemData) return;
+
+      // N4 Decision Logic - Nudge Generation
+      let status, icon, title, nudgeMsg;
+
+      if (currentGlove && chemData.unsuitable_materials.some(m => currentGlove.toLowerCase().includes(m.toLowerCase()))) {
+        status = 'danger';
+        icon = '🔴';
+        title = 'DANGER - Gant Inadapté';
+        nudgeMsg = `⚠️ ALERTE CRITIQUE : Le gant ${currentGlove} n'offre AUCUNE protection contre ${chemical}. Risque de perméation immédiate et d'exposition cutanée grave. ${chemData.hazard_info} Changez IMMÉDIATEMENT pour ${chemData.recommended_glove}.`;
+      } else if (duration > chemData.breakthrough_time_minutes) {
+        status = 'warning';
+        icon = '🟠';
+        title = 'Attention - Durée Excessive';
+        nudgeMsg = `⚠️ La durée d'exposition (${duration} min) dépasse le temps de percée (${chemData.breakthrough_time_minutes} min). Vous devez remplacer les gants à mi-parcours ou réduire la durée d'exposition. Recommandation : gants ${chemData.recommended_glove}.`;
+      } else if (currentGlove && !chemData.material_options.some(m => m.toLowerCase() === currentGlove.toLowerCase()) && currentGlove !== chemData.recommended_glove) {
+        status = 'warning';
+        icon = '🟠';
+        title = 'Protection Sous-Optimale';
+        nudgeMsg = `⚠️ Le gant ${currentGlove} n'est pas optimal pour ${chemical}. ${chemData.hazard_info} Pour une meilleure sécurité, utilisez ${chemData.recommended_glove} (temps de percée: ${chemData.breakthrough_time_minutes} min).`;
+      } else if (currentGlove) {
+        status = 'success';
+        icon = '✅';
+        title = 'Protection Adéquate';
+        nudgeMsg = `✅ Excellente protection ! Le gant ${currentGlove} est approprié pour ${chemical} avec une durée d'exposition de ${duration} minutes. Continuez de respecter les bonnes pratiques d'utilisation.`;
+      } else {
+        status = 'success';
+        icon = '💡';
+        title = 'Recommandation Optimale';
+        nudgeMsg = `💡 Pour "${task}" avec ${chemical}, utilisez des gants ${chemData.recommended_glove}. Temps de percée : ${chemData.breakthrough_time_minutes} minutes. ${chemData.hazard_info}`;
+      }
+
+      displayResult(chemData, status, icon, title, nudgeMsg, task, duration);
+    }
+
+    function displayResult(chemData, status, icon, title, nudgeMsg, task, duration) {
+      const resultBox = document.getElementById('resultBox');
+      
+      resultBox.className = `result-box ${status}`;
+      resultBox.innerHTML = `
+        <div class="result-header">
+          <div class="result-icon">${icon}</div>
+          <div class="result-title">${title}</div>
+        </div>
+        <div class="result-content">
+          <div class="result-item">
+            <div class="result-label">Tâche analysée</div>
+            <div class="result-value">${task}</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Produit chimique</div>
+            <div class="result-value">${chemData.chemical} (CAS ${chemData.cas})</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">⭐ Gant Recommandé</div>
+            <div class="result-value" style="color: #10B981; font-size: 20px; font-weight: 900;">
+              ${chemData.recommended_glove.toUpperCase()}
+            </div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Alternatives acceptables</div>
+            <div class="materials-flex">
+              ${chemData.material_options.map(m => `<div class="material-chip">${m}</div>`).join('')}
+            </div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">❌ Matériaux inadaptés</div>
+            <div class="materials-flex">
+              ${chemData.unsuitable_materials.map(m => `<div class="material-chip unsuitable">${m}</div>`).join('')}
+            </div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Temps de percée (breakthrough time)</div>
+            <div class="result-value">${chemData.breakthrough_time_minutes} minutes | Durée sécuritaire max : ${Math.floor(chemData.breakthrough_time_minutes * 0.8)} min</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Niveau de risque</div>
+            <div class="risk-tag ${chemData.risk_level}">${chemData.risk_level}</div>
+          </div>
+          <div class="nudge-alert">
+            <strong>🧠 Nudge AgenticX5 :</strong><br><br>
+            ${nudgeMsg}
+          </div>
+        </div>
+      `;
+
+      resultBox.style.display = 'block';
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Initialize
+    init();
+  </script>
+</body>
+</html>

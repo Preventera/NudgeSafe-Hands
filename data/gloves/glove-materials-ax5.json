@@ -1,0 +1,134 @@
+[
+  {
+    "chemical": "acétone",
+    "cas": "67-64-1",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "SilverShield", "Viton"],
+    "breakthrough_time_minutes": 240,
+    "unsuitable_materials": ["latex", "vinyle", "nitrile léger", "PVC"],
+    "risk_level": "élevé",
+    "hazard_type": "solvant organique",
+    "skin_effects": "Irritation, dessèchement cutané, absorption possible"
+  },
+  {
+    "chemical": "méthanol",
+    "cas": "67-56-1",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "SilverShield", "alcool polyvinylique (PVA)"],
+    "breakthrough_time_minutes": 180,
+    "unsuitable_materials": ["latex", "vinyle", "PVC", "nitrile standard"],
+    "risk_level": "élevé",
+    "hazard_type": "alcool toxique",
+    "skin_effects": "Absorption cutanée rapide, toxicité systémique"
+  },
+  {
+    "chemical": "acide sulfurique 98%",
+    "cas": "7664-93-9",
+    "recommended_glove": "néoprène",
+    "material_options": ["néoprène", "nitrile épais (>0.4mm)", "butyle"],
+    "breakthrough_time_minutes": 480,
+    "unsuitable_materials": ["latex", "vinyle", "nitrile léger"],
+    "risk_level": "critique",
+    "hazard_type": "acide fort corrosif",
+    "skin_effects": "Brûlures chimiques graves, destruction tissulaire"
+  },
+  {
+    "chemical": "toluène",
+    "cas": "108-88-3",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "SilverShield", "Viton"],
+    "breakthrough_time_minutes": 240,
+    "unsuitable_materials": ["nitrile", "latex", "vinyle", "PVC"],
+    "risk_level": "élevé",
+    "hazard_type": "solvant aromatique",
+    "skin_effects": "Dégraissage cutané, absorption systémique, neurotoxicité"
+  },
+  {
+    "chemical": "éthanol",
+    "cas": "64-17-5",
+    "recommended_glove": "nitrile",
+    "material_options": ["nitrile", "butyle", "néoprène"],
+    "breakthrough_time_minutes": 480,
+    "unsuitable_materials": ["PVA (alcool polyvinylique)"],
+    "risk_level": "modéré",
+    "hazard_type": "alcool",
+    "skin_effects": "Dessèchement cutané, irritation légère"
+  },
+  {
+    "chemical": "eau de javel 12%",
+    "cas": "7681-52-9",
+    "recommended_glove": "nitrile",
+    "material_options": ["nitrile", "néoprène", "latex (si pas allergie)"],
+    "breakthrough_time_minutes": 480,
+    "unsuitable_materials": ["vinyle léger"],
+    "risk_level": "modéré",
+    "hazard_type": "oxydant corrosif",
+    "skin_effects": "Irritation, blanchiment cutané, brûlures si concentré"
+  },
+  {
+    "chemical": "essence (gazoline)",
+    "cas": "8006-61-9",
+    "recommended_glove": "nitrile épais",
+    "material_options": ["nitrile épais", "Viton", "butyle"],
+    "breakthrough_time_minutes": 480,
+    "unsuitable_materials": ["latex", "vinyle", "nitrile léger"],
+    "risk_level": "élevé",
+    "hazard_type": "hydrocarbure pétrolier",
+    "skin_effects": "Dégraissage, dermatite, absorption de benzène"
+  },
+  {
+    "chemical": "formaldéhyde 37%",
+    "cas": "50-00-0",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "nitrile épais", "néoprène"],
+    "breakthrough_time_minutes": 240,
+    "unsuitable_materials": ["latex", "vinyle", "PVC"],
+    "risk_level": "critique",
+    "hazard_type": "cancérigène, irritant sévère",
+    "skin_effects": "Brûlures, sensibilisation, cancérogène classe 1"
+  },
+  {
+    "chemical": "soude caustique (NaOH) 50%",
+    "cas": "1310-73-2",
+    "recommended_glove": "néoprène",
+    "material_options": ["néoprène", "nitrile épais", "butyle"],
+    "breakthrough_time_minutes": 480,
+    "unsuitable_materials": ["latex léger", "vinyle"],
+    "risk_level": "critique",
+    "hazard_type": "base forte corrosive",
+    "skin_effects": "Brûlures alcalines profondes, destruction tissulaire"
+  },
+  {
+    "chemical": "peroxyde d'hydrogène 30%",
+    "cas": "7722-84-1",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "Viton", "néoprène"],
+    "breakthrough_time_minutes": 240,
+    "unsuitable_materials": ["latex", "nitrile standard", "vinyle"],
+    "risk_level": "élevé",
+    "hazard_type": "oxydant puissant",
+    "skin_effects": "Blanchiment, brûlures oxydantes, bulles cutanées"
+  },
+  {
+    "chemical": "dichlorométhane",
+    "cas": "75-09-2",
+    "recommended_glove": "SilverShield",
+    "material_options": ["SilverShield", "Viton", "4H (PE/EVAL)"],
+    "breakthrough_time_minutes": 60,
+    "unsuitable_materials": ["latex", "nitrile", "vinyle", "néoprène", "butyle"],
+    "risk_level": "critique",
+    "hazard_type": "solvant chloré cancérigène",
+    "skin_effects": "Absorption rapide, métabolisé en CO, cancérigène probable"
+  },
+  {
+    "chemical": "acétate d'éthyle",
+    "cas": "141-78-6",
+    "recommended_glove": "butyle",
+    "material_options": ["butyle", "alcool polyvinylique (PVA)", "SilverShield"],
+    "breakthrough_time_minutes": 180,
+    "unsuitable_materials": ["latex", "vinyle", "nitrile léger"],
+    "risk_level": "modéré",
+    "hazard_type": "ester, solvant",
+    "skin_effects": "Dégraissage, irritation, absorption modérée"
+  }
+]
