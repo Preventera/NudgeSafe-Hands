@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscription - NudgeSafe Hands™</title>
-  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-  
   <style>
     * {
       margin: 0;
@@ -32,8 +30,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -54,37 +53,17 @@
       100% { transform: translate(50px, 50px); }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
-      50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.7); }
-    }
-
-    .container {
+    .registration-container {
       position: relative;
       z-index: 1;
       max-width: 600px;
       width: 100%;
-      padding: 20px;
-      animation: fadeInUp 0.8s ease;
-    }
-
-    .registration-card {
-      background: rgba(30, 41, 59, 0.9);
+      background: rgba(30, 41, 59, 0.8);
       border: 1px solid rgba(59, 130, 246, 0.3);
       border-radius: 24px;
-      padding: 50px 40px;
+      padding: 50px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -92,7 +71,7 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .logo-icon {
@@ -102,7 +81,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: pulse 3s ease-in-out infinite;
     }
 
     .logo-icon img {
@@ -117,7 +95,7 @@
       background: linear-gradient(135deg, var(--light) 0%, var(--primary) 50%, var(--secondary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -1px;
+      margin-bottom: 3px;
     }
 
     .logo-text .tagline {
@@ -130,18 +108,18 @@
 
     .registration-header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 40px;
     }
 
-    .registration-header h2 {
-      font-size: 26px;
+    .registration-title {
+      font-size: 32px;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       color: var(--light);
     }
 
-    .registration-header p {
-      font-size: 15px;
+    .registration-subtitle {
+      font-size: 16px;
       color: var(--gray);
       line-height: 1.6;
     }
@@ -152,48 +130,44 @@
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 30px;
-      text-align: center;
     }
 
-    .app-info .app-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .app-info h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--primary);
-    }
-
-    .app-info p {
-      font-size: 14px;
+    .app-info-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       color: var(--gray);
-      line-height: 1.5;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .app-info-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .form-group {
       margin-bottom: 25px;
     }
 
-    .form-group label {
+    .form-label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
       font-size: 14px;
+      font-weight: 600;
       color: var(--light);
+      margin-bottom: 8px;
     }
 
-    .form-group label .required {
+    .form-label .required {
       color: #EF4444;
       margin-left: 3px;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .form-input,
+    .form-textarea {
       width: 100%;
-      padding: 14px 18px;
+      padding: 14px 16px;
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(59, 130, 246, 0.3);
       border-radius: 10px;
@@ -203,21 +177,22 @@
       transition: all 0.3s ease;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .form-input:focus,
+    .form-textarea:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
-    .form-group textarea {
+    .form-textarea {
       resize: vertical;
       min-height: 100px;
     }
 
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
+    .form-hint {
+      font-size: 12px;
       color: var(--gray);
+      margin-top: 5px;
     }
 
     .submit-btn {
@@ -238,41 +213,22 @@
 
     .submit-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-    }
-
-    .submit-btn:active {
-      transform: translateY(0);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
     }
 
     .submit-btn:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 25px;
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    .back-link:hover {
-      color: var(--secondary);
-    }
-
     .privacy-notice {
-      margin-top: 20px;
-      padding: 15px;
+      margin-top: 30px;
+      padding: 20px;
       background: rgba(16, 185, 129, 0.1);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 10px;
-      font-size: 12px;
+      border-radius: 12px;
+      font-size: 13px;
       color: var(--gray);
       line-height: 1.6;
     }
@@ -283,179 +239,248 @@
 
     .success-message {
       display: none;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid var(--accent);
-      border-radius: 12px;
-      padding: 20px;
       text-align: center;
-      margin-bottom: 20px;
+      padding: 30px;
     }
 
     .success-message.show {
       display: block;
-      animation: fadeInUp 0.5s ease;
     }
 
-    .success-message .icon {
-      font-size: 48px;
+    .success-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .success-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
       margin-bottom: 15px;
     }
 
-    .success-message h3 {
-      font-size: 20px;
-      color: var(--accent);
-      margin-bottom: 10px;
+    .success-text {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 20px;
     }
 
-    .success-message p {
-      color: var(--light);
+    .countdown {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .error-message {
+      padding: 15px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      color: #EF4444;
       font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
     }
 
-    @media (max-width: 640px) {
-      .registration-card {
+    .error-message.show {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .registration-container {
         padding: 30px 25px;
       }
 
-      .logo-text h1 {
-        font-size: 22px;
+      .registration-title {
+        font-size: 26px;
       }
 
-      .registration-header h2 {
+      .logo-text h1 {
         font-size: 22px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="registration-card">
-      <div class="logo">
-        <div class="logo-icon">
-          <img src="assets/agenticx5-logo.png" alt="AgenticX5 Logo">
-        </div>
-        <div class="logo-text">
-          <h1>NudgeSafe Hands™</h1>
-          <p class="tagline">AgenticX5 Ecosystem</p>
-        </div>
+  <div class="registration-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <img src="assets/agenticx5-logo.png" alt="AgenticX5 Logo">
+      </div>
+      <div class="logo-text">
+        <h1>NudgeSafe Hands™</h1>
+        <p class="tagline">AgenticX5 Ecosystem</p>
+      </div>
+    </div>
+
+    <div class="registration-header">
+      <h2 class="registration-title">Inscription Professionnelle</h2>
+      <p class="registration-subtitle">Accédez à nos outils avancés de sécurité comportementale des mains</p>
+    </div>
+
+    <div class="app-info" id="appInfo">
+      <div class="app-info-title">Application demandée</div>
+      <div class="app-info-name" id="appName">Chargement...</div>
+    </div>
+
+    <div class="error-message" id="errorMessage"></div>
+
+    <form id="registrationForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="edf88301-655f-4401-9e07-82e3f3a7464d">
+      <input type="hidden" name="subject" value="Nouvelle inscription NudgeSafe Hands">
+      <input type="hidden" name="redirect" value="false">
+      <input type="hidden" name="from_name" value="NudgeSafe Hands Registration">
+      <input type="hidden" name="app_requested" id="appRequestedField" value="">
+
+      <div class="form-group">
+        <label class="form-label" for="name">
+          Nom complet <span class="required">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-input" 
+          required 
+          placeholder="Mario Boudreau"
+        >
       </div>
 
-      <div class="registration-header">
-        <h2>Inscription Requise</h2>
-        <p>Accédez aux applications professionnelles avec votre email professionnel</p>
+      <div class="form-group">
+        <label class="form-label" for="email">
+          Email professionnel <span class="required">*</span>
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="form-input" 
+          required 
+          placeholder="mario@votreentreprise.com"
+        >
+        <div class="form-hint">Emails personnels (Gmail, Yahoo, etc.) non acceptés</div>
       </div>
 
-      <!-- App Info (dynamique selon l'app demandée) -->
-      <div class="app-info" id="appInfo">
-        <div class="app-icon">🧤</div>
-        <h3>Application Demandée</h3>
-        <p>Inscription requise pour accéder à cette application</p>
+      <div class="form-group">
+        <label class="form-label" for="company">
+          Entreprise <span class="required">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="company" 
+          name="company" 
+          class="form-input" 
+          required 
+          placeholder="Preventera Inc."
+        >
       </div>
 
-      <!-- Success Message -->
-      <div class="success-message" id="successMessage">
-        <div class="icon">✅</div>
-        <h3>Inscription Réussie !</h3>
-        <p>Redirection vers l'application dans <span id="countdown">3</span> secondes...</p>
+      <div class="form-group">
+        <label class="form-label" for="role">
+          Fonction <span class="required">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="role" 
+          name="role" 
+          class="form-input" 
+          required 
+          placeholder="Responsable HSE"
+        >
       </div>
 
-      <!-- Registration Form -->
-      <form action="https://api.web3forms.com/submit" method="POST" id="registrationForm">
-        <!-- Web3Forms Access Key -->
-        <input type="hidden" name="access_key" value="edf88301-655f-4401-9e07-82e3f3a7464d">
-        
-        <!-- Redirect URL (will be set dynamically) -->
-        <input type="hidden" name="redirect" id="redirectUrl" value="">
-        
-        <!-- Hidden field for requested app -->
-        <input type="hidden" name="requested_app" id="requestedApp" value="">
-
-        <div class="form-group">
-          <label for="name">Nom complet <span class="required">*</span></label>
-          <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email professionnel <span class="required">*</span></label>
-          <input type="email" id="email" name="email" placeholder="jean.dupont@entreprise.com" required>
-        </div>
-
-        <div class="form-group">
-          <label for="company">Entreprise <span class="required">*</span></label>
-          <input type="text" id="company" name="company" placeholder="Nom de votre entreprise" required>
-        </div>
-
-        <div class="form-group">
-          <label for="role">Fonction</label>
-          <input type="text" id="role" name="role" placeholder="Responsable HSE, Superviseur, etc.">
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message (optionnel)</label>
-          <textarea id="message" name="message" placeholder="Questions ou besoins spécifiques..."></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          S'inscrire et Accéder
-        </button>
-      </form>
-
-      <div class="privacy-notice">
-        <strong>🔒 Confidentialité Garantie</strong><br>
-        Vos données sont protégées selon la Loi 25 / RGPD. Nous utilisons votre email uniquement pour vous donner accès aux applications et vous contacter si nécessaire. Aucune utilisation commerciale.
+      <div class="form-group">
+        <label class="form-label" for="message">
+          Message (optionnel)
+        </label>
+        <textarea 
+          id="message" 
+          name="message" 
+          class="form-textarea" 
+          placeholder="Parlez-nous de votre projet ou cas d'usage..."
+        ></textarea>
       </div>
 
-      <a href="index.html" class="back-link">← Retour à l'accueil</a>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        S'inscrire et Accéder →
+      </button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">✅</div>
+      <h3 class="success-title">Inscription Réussie !</h3>
+      <p class="success-text">Nous avons bien reçu votre demande d'accès.</p>
+      <p class="success-text">Redirection dans <span class="countdown" id="countdown">3</span> secondes...</p>
+    </div>
+
+    <div class="privacy-notice">
+      <strong>🔒 Protection des données</strong><br>
+      Vos informations sont traitées conformément à la Loi 25 (Québec) et au RGPD. 
+      Elles servent uniquement à valider votre accès professionnel et ne seront jamais partagées.
     </div>
   </div>
 
   <script>
-    // Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const app = urlParams.get('app');
-
-    // App configurations
-    const apps = {
-      'glove-selector': {
-        name: 'GenAISafety - Sélecteur de Gants',
-        icon: '🧤',
-        description: 'Recommandation instantanée du gant approprié selon le produit chimique',
-        url: 'src/app/ax5-safenudge-glove-selector.html'
-      },
-      'dashboard': {
-        name: 'NudgeSafe Dashboard',
-        icon: '📊',
-        description: 'Surveillance temps réel avec monitoring 4 zones et prédictions IA',
-        url: 'src/app/ax5-safenudge-dashboard.html'
-      }
+    // App names mapping
+    const appNames = {
+      'glove-selector': 'GenAISafety - Sélecteur de Gants Intelligent',
+      'dashboard': 'NudgeSafe Dashboard - Surveillance Temps Réel'
     };
 
-    // Update app info
-    if (app && apps[app]) {
-      const appInfo = apps[app];
-      document.getElementById('appInfo').innerHTML = `
-        <div class="app-icon">${appInfo.icon}</div>
-        <h3>${appInfo.name}</h3>
-        <p>${appInfo.description}</p>
-      `;
-      document.getElementById('requestedApp').value = appInfo.name;
-    } else {
-      // Default if no app specified
-      document.getElementById('appInfo').innerHTML = `
-        <div class="app-icon">🔐</div>
-        <h3>Accès Applications Professionnelles</h3>
-        <p>Inscrivez-vous pour accéder aux outils NudgeSafe Hands</p>
-      `;
-    }
+    // App redirect URLs
+    const appUrls = {
+      'glove-selector': 'src/app/ax5-safenudge-glove-selector.html',
+      'dashboard': 'src/app/ax5-safenudge-dashboard.html'
+    };
+
+    // Get app from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedApp = urlParams.get('app') || 'glove-selector';
+
+    // Display app name
+    document.getElementById('appName').textContent = appNames[requestedApp] || 'Application non spécifiée';
+    document.getElementById('appRequestedField').value = appNames[requestedApp] || requestedApp;
+
+    // Common free email domains to block
+    const commonFreeEmails = [
+      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
+      'yahoo.fr', 'hotmail.fr', 'live.com', 'live.fr',
+      'aol.com', 'mail.com', 'protonmail.com', 'icloud.com'
+    ];
+
+    // Professional email validation
+    document.getElementById('email').addEventListener('blur', function(e) {
+      const email = e.target.value.toLowerCase();
+      const domain = email.split('@')[1];
+      
+      if (domain && commonFreeEmails.includes(domain)) {
+        e.target.setCustomValidity('Veuillez utiliser un email professionnel (pas Gmail, Yahoo, etc.)');
+        e.target.reportValidity();
+      } else {
+        e.target.setCustomValidity('');
+      }
+    });
 
     // Form submission
-    const form = document.getElementById('registrationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const successMessage = document.getElementById('successMessage');
-
-    form.addEventListener('submit', async (e) => {
+    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMessage = document.getElementById('errorMessage');
+      const form = e.target;
+
+      // Validate email one more time
+      const email = document.getElementById('email').value.toLowerCase();
+      const domain = email.split('@')[1];
       
+      if (domain && commonFreeEmails.includes(domain)) {
+        errorMessage.textContent = '❌ Veuillez utiliser un email professionnel. Les adresses Gmail, Yahoo, Hotmail, etc. ne sont pas acceptées.';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      errorMessage.classList.remove('show');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Envoi en cours...';
 
@@ -466,51 +491,39 @@
           body: formData
         });
 
-        if (response.ok) {
-          // Show success message
+        const data = await response.json();
+
+        if (data.success) {
+          // Hide form
           form.style.display = 'none';
-          successMessage.classList.add('show');
+          document.querySelector('.app-info').style.display = 'none';
+          document.querySelector('.privacy-notice').style.display = 'none';
+
+          // Show success message
+          document.getElementById('successMessage').classList.add('show');
 
           // Countdown and redirect
-          let countdown = 3;
-          const countdownElement = document.getElementById('countdown');
+          let timeLeft = 3;
+          const countdownEl = document.getElementById('countdown');
           
           const countdownInterval = setInterval(() => {
-            countdown--;
-            countdownElement.textContent = countdown;
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
             
-            if (countdown === 0) {
+            if (timeLeft <= 0) {
               clearInterval(countdownInterval);
-              
-              // Redirect to requested app or home
-              if (app && apps[app]) {
-                window.location.href = apps[app].url;
-              } else {
-                window.location.href = 'index.html';
-              }
+              window.location.href = appUrls[requestedApp] || 'index.html';
             }
           }, 1000);
         } else {
-          throw new Error('Form submission failed');
+          throw new Error(data.message || 'Erreur de soumission');
         }
       } catch (error) {
-        alert('Erreur lors de l\'inscription. Veuillez réessayer.');
+        console.error('Error:', error);
+        errorMessage.textContent = '❌ Une erreur est survenue. Veuillez réessayer.';
+        errorMessage.classList.add('show');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'S\'inscrire et Accéder';
-      }
-    });
-
-    // Validate email domain (optional - professional email check)
-    const emailInput = document.getElementById('email');
-    emailInput.addEventListener('blur', () => {
-      const email = emailInput.value;
-      const commonFreeEmails = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
-      const domain = email.split('@')[1];
-      
-      if (domain && commonFreeEmails.includes(domain.toLowerCase())) {
-        emailInput.setCustomValidity('Veuillez utiliser un email professionnel (pas Gmail, Yahoo, etc.)');
-      } else {
-        emailInput.setCustomValidity('');
+        submitBtn.textContent = "S'inscrire et Accéder →";
       }
     });
   </script>

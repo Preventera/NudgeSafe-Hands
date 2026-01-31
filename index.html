@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NudgeSafe Hands - Plateforme d'intelligence artificielle comportementale pour rÃ©duire les blessures aux mains en milieu industriel">
+  <meta name="description" content="NudgeSafe Hands - Plateforme d'intelligence artificielle comportementale pour réduire les blessures aux mains en milieu industriel">
   <meta name="keywords" content="hand safety, behavioral AI, HSE, workplace safety, PPE, gloves, nudge theory">
   <meta name="author" content="Preventera Inc. / AgenticX5 Ecosystem">
-  <title>NudgeSafe Handsâ„¢ - Behavioral AI for Hand Safety</title>
+  <title>NudgeSafe Hands™ - Behavioral AI for Hand Safety</title>
   
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   
@@ -98,13 +98,17 @@
     .logo-icon {
       width: 70px;
       height: 70px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
       animation: pulse 3s ease-in-out infinite;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .logo-text h1 {
@@ -250,9 +254,21 @@
     }
 
     .feature-item::before {
-      content: 'âœ“';
+      content: '✓';
       color: var(--accent);
       font-weight: 700;
+    }
+
+    .registration-badge {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      font-size: 13px;
+      color: #EF4444;
+      font-weight: 600;
+      text-align: center;
     }
 
     .app-link {
@@ -426,21 +442,16 @@
     <header>
       <div class="logo">
         <div class="logo-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
-            <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"/>
-            <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
-            <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8V9a2 2 0 1 1 4 0"/>
-          </svg>
+          <img src="assets/agenticx5-logo.png" alt="AgenticX5 Logo">
         </div>
         <div class="logo-text">
-          <h1>NudgeSafe Handsâ„¢</h1>
+          <h1>NudgeSafe Hands™</h1>
           <p class="tagline">AgenticX5 Ecosystem</p>
         </div>
       </div>
 
-      <h2 class="hero-title">Plateforme d'Intelligence Artificielle Comportementale<br>pour la SÃ©curitÃ© des Mains</h2>
-      <p class="hero-subtitle">RÃ©duire les blessures de 83% grÃ¢ce aux nudges adaptatifs</p>
+      <h2 class="hero-title">Plateforme d'Intelligence Artificielle Comportementale<br>pour la Sécurité des Mains</h2>
+      <p class="hero-subtitle">Réduire les blessures de 83% grâce aux nudges adaptatifs</p>
 
       <div class="badges">
         <span class="badge">Version 1.0.0</span>
@@ -455,100 +466,102 @@
     <div class="apps-grid">
       <!-- App 1: Glove Selector -->
       <div class="app-card" onclick="location.href='registration.html?app=glove-selector'">
-        <div class="app-icon">ðŸ§¤</div>
+        <div class="app-icon">🧤</div>
         <h3 class="app-title">GenAISafety</h3>
-        <p class="app-subtitle">SÃ©lecteur de Gants Intelligent</p>
+        <p class="app-subtitle">Sélecteur de Gants Intelligent</p>
         <p class="app-description">
-          Recommandation instantanÃ©e du gant appropriÃ© selon le produit chimique. Base de donnÃ©es 15+ produits avec temps de percÃ©e validÃ©s.
+          Recommandation instantanée du gant approprié selon le produit chimique. Base de données 15+ produits avec temps de percée validés.
         </p>
         <div class="app-features">
-          <div class="feature-item">Analyse en temps rÃ©el (&lt;1 seconde)</div>
+          <div class="feature-item">Analyse en temps réel (&lt;1 seconde)</div>
           <div class="feature-item">Nudges adaptatifs comportementaux</div>
-          <div class="feature-item">Standards OSHA/EN 374 intÃ©grÃ©s</div>
+          <div class="feature-item">Standards OSHA/EN 374 intégrés</div>
           <div class="feature-item">Interface multilingue</div>
-        </div>        <div style="margin-top: 15px; padding: 10px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; font-size: 12px; color: #EF4444; font-weight: 600;">
+        </div>
+        <div class="registration-badge">
           🔐 Inscription requise avec email professionnel
         </div>
         <a href="registration.html?app=glove-selector" class="app-link">
-          Lancer l'application â†’
+          S'inscrire et Accéder →
         </a>
       </div>
 
       <!-- App 2: Dashboard -->
       <div class="app-card" onclick="location.href='registration.html?app=dashboard'">
-        <div class="app-icon">ðŸ“Š</div>
+        <div class="app-icon">📊</div>
         <h3 class="app-title">NudgeSafe Dashboard</h3>
-        <p class="app-subtitle">Surveillance Temps RÃ©el</p>
+        <p class="app-subtitle">Surveillance Temps Réel</p>
         <p class="app-description">
-          Dashboard superviseur avec monitoring 4 zones, prÃ©dictions 72h, et orchestration de 4 agents IA AgenticX5.
+          Dashboard superviseur avec monitoring 4 zones, prédictions 72h, et orchestration de 4 agents IA AgenticX5.
         </p>
         <div class="app-features">
-          <div class="feature-item">KPIs temps rÃ©el (score sÃ©curitÃ©, conformitÃ©)</div>
-          <div class="feature-item">AI prÃ©dictive (HandRiskPredictor)</div>
-          <div class="feature-item">Historique nudges + efficacitÃ©</div>
-          <div class="feature-item">Human-in-the-Loop activÃ©</div>
-        </div>        <div style="margin-top: 15px; padding: 10px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; font-size: 12px; color: #EF4444; font-weight: 600;">
+          <div class="feature-item">KPIs temps réel (score sécurité, conformité)</div>
+          <div class="feature-item">AI prédictive (HandRiskPredictor)</div>
+          <div class="feature-item">Historique nudges + efficacité</div>
+          <div class="feature-item">Human-in-the-Loop activé</div>
+        </div>
+        <div class="registration-badge">
           🔐 Inscription requise avec email professionnel
         </div>
         <a href="registration.html?app=dashboard" class="app-link">
-          Voir le dashboard â†’
+          S'inscrire et Accéder →
         </a>
       </div>
 
       <!-- App 3: Presentation -->
       <div class="app-card" onclick="location.href='src/app/ax5-safenudge-presentation.html'">
-        <div class="app-icon">ðŸ“½ï¸</div>
+        <div class="app-icon">🎥</div>
         <h3 class="app-title">Executive Presentation</h3>
-        <p class="app-subtitle">PrÃ©sentation StratÃ©gique</p>
+        <p class="app-subtitle">Présentation Stratégique</p>
         <p class="app-description">
-          12 slides professionnels couvrant thÃ©orie du nudge, architecture 5 niveaux, conformitÃ© rÃ©glementaire et ROI dÃ©ploiement.
+          12 slides professionnels couvrant théorie du nudge, architecture 5 niveaux, conformité réglementaire et ROI déploiement.
         </p>
         <div class="app-features">
           <div class="feature-item">Fondements scientifiques (Thaler, Kahneman)</div>
           <div class="feature-item">Standards ISO 45001/OSHA/CNESST</div>
-          <div class="feature-item">Cas d'usage industriels validÃ©s</div>
-          <div class="feature-item">Roadmap 18 mois dÃ©taillÃ©e</div>
+          <div class="feature-item">Cas d'usage industriels validés</div>
+          <div class="feature-item">Roadmap 18 mois détaillée</div>
         </div>
         <a href="src/app/ax5-safenudge-presentation.html" class="app-link">
-          Ouvrir prÃ©sentation â†’
+          Ouvrir présentation →
         </a>
       </div>
     </div>
 
     <!-- Info Section -->
     <div class="info-section">
-      <h2 class="info-title">ðŸŽ¯ Architecture AgenticX5 - 5 Niveaux</h2>
+      <h2 class="info-title">🎯 Architecture AgenticX5 - 5 Niveaux</h2>
       <div class="info-content">
         <div class="info-item">
-          <div class="info-icon">ðŸ“¡</div>
+          <div class="info-icon">📡</div>
           <div class="info-text">
             <h3>N1 - Collecte</h3>
-            <p>IoT, Vision IA, RFID, historique incidents, mÃ©tÃ©o, production (temps rÃ©el + batch)</p>
+            <p>IoT, Vision IA, RFID, historique incidents, météo, production (temps réel + batch)</p>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">ðŸ”„</div>
+          <div class="info-icon">🔄</div>
           <div class="info-text">
             <h3>N2 - Normalisation</h3>
             <p>Taxonomie ISO 45001, cartographie zones, matrice gants, niveaux d'alerte</p>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">ðŸ§ </div>
+          <div class="info-icon">🧠</div>
           <div class="info-text">
             <h3>N3 - Analyse IA</h3>
-            <p>Scoring zones, prÃ©diction 72h (Random Forest), dÃ©tection non-port, A/B testing</p>
+            <p>Scoring zones, prédiction 72h (Random Forest), détection non-port, A/B testing</p>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">âš¡</div>
+          <div class="info-icon">⚡</div>
           <div class="info-text">
             <h3>N4 - Recommandations</h3>
-            <p>Nudges personnalisÃ©s (type + canal + intensitÃ©), escalade automatique, HITL</p>
+            <p>Nudges personnalisés (type + canal + intensité), escalade automatique, HITL</p>
           </div>
         </div>
         <div class="info-item">
-          <div class="info-icon">ðŸ¤–</div>
+          <div class="info-icon">🤖</div>
           <div class="info-text">
             <h3>N5 - Orchestration</h3>
             <p>4 agents IA: NudgeOrchestrator, HandRiskPredictor, EffectivenessTracker, ComplianceReporter</p>
@@ -560,46 +573,46 @@
     <!-- Links Section -->
     <div class="links-section">
       <a href="https://github.com/Preventera/NudgeSafe-Hands" target="_blank" class="link-card">
-        <div class="link-icon">ðŸ“¦</div>
+        <div class="link-icon">📦</div>
         <div class="link-title">GitHub Repository</div>
         <div class="link-subtitle">Code source & documentation</div>
       </a>
 
       <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/README.md" target="_blank" class="link-card">
-        <div class="link-icon">ðŸ“š</div>
+        <div class="link-icon">📚</div>
         <div class="link-title">Documentation</div>
         <div class="link-subtitle">Guides complets & API</div>
       </a>
 
       <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/QUICK_START.md" target="_blank" class="link-card">
-        <div class="link-icon">ðŸš€</div>
+        <div class="link-icon">🚀</div>
         <div class="link-title">Quick Start</div>
-        <div class="link-subtitle">DÃ©marrage 5 minutes</div>
+        <div class="link-subtitle">Démarrage 5 minutes</div>
       </a>
 
       <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/deployment/deployment-scenarios-ax5.md" target="_blank" class="link-card">
-        <div class="link-icon">ðŸ­</div>
+        <div class="link-icon">🏭</div>
         <div class="link-title">Cas d'Usage</div>
-        <div class="link-subtitle">4 scÃ©narios industriels</div>
+        <div class="link-subtitle">4 scénarios industriels</div>
       </a>
 
       <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/compliance/compliance-standards-ax5.md" target="_blank" class="link-card">
-        <div class="link-icon">âœ…</div>
-        <div class="link-title">ConformitÃ©</div>
+        <div class="link-icon">✅</div>
+        <div class="link-title">Conformité</div>
         <div class="link-subtitle">ISO 45001, OSHA, CNESST</div>
       </a>
 
-      <a href="https://preventera.ca" target="_blank" class="link-card">
-        <div class="link-icon">ðŸŒ</div>
-        <div class="link-title">Preventera Inc.</div>
-        <div class="link-subtitle">Site corporatif</div>
+      <a href="mailto:team@agenticx5.com" class="link-card">
+        <div class="link-icon">📧</div>
+        <div class="link-title">Contact</div>
+        <div class="link-subtitle">team@agenticx5.com</div>
       </a>
     </div>
 
     <!-- Footer -->
     <footer>
       <div class="footer-content">
-        Â© 2025 Preventera Inc. / AgenticX5 Ecosystem â€¢ NudgeSafe Handsâ„¢ â€¢ AX5-SafeNudgeâ„¢
+        © 2025 Preventera Inc. / AgenticX5 Ecosystem • NudgeSafe Hands™ • AX5-SafeNudge™
       </div>
       <div class="footer-links">
         <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/LICENSE" target="_blank">MIT License</a>
