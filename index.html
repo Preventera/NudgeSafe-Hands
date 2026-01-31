@@ -1,774 +1,609 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgenticX5 - Intelligence Agentique HSE | 122+ Agents IA pour la Sécurité au Travail</title>
-    <meta name="description" content="Plateforme d'intelligence agentique pour la santé, sécurité et environnement au travail. 122+ agents IA orchestrés, architecture WAVE 4, prédictions 94.7% de précision.">
-    
-    <!-- SEO & OpenGraph -->
-    <meta property="og:title" content="AgenticX5 - Intelligence Agentique HSE">
-    <meta property="og:description" content="Architecture WAVE 4 avec 122+ agents IA pour transformer la SST">
-    <meta property="og:type" content="website">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <style>
-        /* ===============================================
-           AGENTICX5 - CSS UNIFIÉ
-           GenAISafety × Preventera
-           =============================================== */
-        
-        /* === VARIABLES CHARTE GRAPHIQUE === */
-        :root {
-            /* Fond sombre violet */
-            --bg-900: #0b0712;
-            --bg-800: #120a1d;
-            --bg-700: #1a1227;
-            --panel: #1a1227;
-            
-            /* Violet électrique principal */
-            --primary-500: #7c4dff;
-            --primary-400: #9a78ff;
-            --primary-300: #b396ff;
-            
-            /* Accents */
-            --accent-pink: #ff4dd2;
-            --accent-cyan: #45d3ff;
-            --accent-orange: #ff9800;
-            --accent-green: #4caf50;
-            
-            /* Textes */
-            --text-100: #ffffff;
-            --text-200: #f0ecf9;
-            --text-300: #cfc9dc;
-            --text-400: #b8b1c9;
-            --text-500: #9b93ad;
-            
-            /* Bordures et ombres */
-            --border: #2a203a;
-            --border-light: #3a2f4a;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,.2);
-            --shadow-md: 0 4px 16px rgba(0,0,0,.3);
-            --shadow-lg: 0 10px 30px rgba(0,0,0,.45);
-            
-            /* SST Spécifiques */
-            --color-safe: #4caf50;
-            --color-warning: #ff9800;
-            --color-alert: #f44336;
-            --color-info: #2196f3;
-        }
-        
-        /* === RESET & BASE === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--bg-900) 0%, var(--bg-800) 100%);
-            color: var(--text-300);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* === NAVIGATION === */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(11, 7, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        nav.scrolled {
-            background: rgba(11, 7, 18, 0.95);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-400) 0%, var(--accent-pink) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--text-300);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-400);
-        }
-        
-        /* === HERO SECTION === */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(124, 77, 255, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            animation: pulse 8s ease-in-out infinite;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            right: -20%;
-            width: 60%;
-            height: 60%;
-            background: radial-gradient(circle at center, rgba(255, 77, 210, 0.12) 0%, transparent 70%);
-            pointer-events: none;
-            animation: pulse 10s ease-in-out infinite reverse;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.5;
-                transform: translateX(-50%) scale(1);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translateX(-50%) scale(1.1);
-            }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: var(--text-100);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-            animation: fadeInUp 0.8s ease-out;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-300);
-            margin: 0 auto 2rem;
-            max-width: 800px;
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1.2s ease-out;
-        }
-        
-        /* === BOUTONS === */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            border: none;
-        }
-        
-        .btn--primary {
-            background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-400) 100%);
-            color: var(--text-100);
-            box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
-        }
-        
-        .btn--primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(124, 77, 255, 0.6);
-        }
-        
-        .btn--ghost {
-            background: transparent;
-            border: 1px solid var(--border-light);
-            color: var(--text-200);
-        }
-        
-        .btn--ghost:hover {
-            background: rgba(124, 77, 255, 0.1);
-            border-color: var(--primary-400);
-        }
-        
-        /* === SECTIONS === */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(124, 77, 255, 0.1);
-            border: 1px solid var(--primary-400);
-            border-radius: 999px;
-            color: var(--primary-400);
-            font-weight: 600;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--text-100);
-            margin-bottom: 1rem;
-        }
-        
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-400);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* === CARTES GLASS === */
-        .card {
-            background: rgba(26, 18, 39, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-light);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-100);
-            margin-bottom: 0.5rem;
-        }
-        
-        .card-description {
-            color: var(--text-400);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        
-        .card-link {
-            color: var(--primary-400);
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-        
-        .card-link:hover {
-            color: var(--primary-300);
-        }
-        
-        /* === GRID LAYOUTS === */
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .grid--2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        
-        .grid--3 {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        
-        .grid--4 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-        
-        /* === BADGES === */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid;
-        }
-        
-        .badge--safe {
-            background: rgba(76, 175, 80, 0.1);
-            border-color: var(--color-safe);
-            color: var(--color-safe);
-        }
-        
-        .badge--info {
-            background: rgba(33, 150, 243, 0.1);
-            border-color: var(--color-info);
-            color: var(--color-info);
-        }
-        
-        /* === FOOTER === */
-        footer {
-            background: rgba(11, 7, 18, 0.95);
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--text-400);
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-400);
-        }
-        
-        .footer-copyright {
-            color: var(--text-500);
-            font-size: 0.875rem;
-        }
-        
-        /* === ANIMATIONS === */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-        
-        /* === RESPONSIVE === */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.875rem;
-            }
-            
-            section {
-                padding: 4rem 1.5rem;
-            }
-            
-            .hero {
-                padding: 5rem 1.5rem 3rem;
-            }
-            
-            .grid--2,
-            .grid--3,
-            .grid--4 {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NudgeSafe Hands - Plateforme d'intelligence artificielle comportementale pour réduire les blessures aux mains en milieu industriel">
+  <meta name="keywords" content="hand safety, behavioral AI, HSE, workplace safety, PPE, gloves, nudge theory">
+  <meta name="author" content="Preventera Inc. / AgenticX5 Ecosystem">
+  <title>NudgeSafe Hands™ - Behavioral AI for Hand Safety</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3B82F6;
+      --secondary: #8B5CF6;
+      --accent: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --dark: #0F172A;
+      --dark-lighter: #1E293B;
+      --light: #E2E8F0;
+      --gray: #64748B;
+    }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark-lighter) 50%, var(--dark) 100%);
+      color: var(--light);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.7); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text h1 {
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--light) 0%, var(--primary) 50%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+      margin-bottom: 5px;
+    }
+
+    .logo-text .tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .hero-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .badge {
+      padding: 8px 16px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .badge.green {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--accent);
+    }
+
+    /* Apps Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+      animation: fadeInUp 0.8s ease 0.4s backwards;
+    }
+
+    .app-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px;
+      padding: 35px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 70%);
+    }
+
+    .app-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+    }
+
+    .app-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .app-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--light);
+    }
+
+    .app-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .app-description {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .app-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--light);
+    }
+
+    .feature-item::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .app-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .app-link:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Info Section */
+    .info-section {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.6s backwards;
+    }
+
+    .info-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--light);
+    }
+
+    .info-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .info-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .info-text h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--light);
+    }
+
+    .info-text p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* Links Section */
+    .links-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.8s backwards;
+    }
+
+    .link-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--light);
+    }
+
+    .link-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    .link-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .link-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .link-subtitle {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      margin-top: 60px;
+      animation: fadeInUp 0.8s ease 1s backwards;
+    }
+
+    .footer-content {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo-text h1 {
+        font-size: 32px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-content {
+        grid-template-columns: 1fr;
+      }
+
+      .links-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- NAVIGATION -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">AgenticX5</div>
-            <ul class="nav-links">
-                <li><a href="#applications">Applications</a></li>
-                <li><a href="#architecture">Architecture</a></li>
-                <li><a href="#agents">Agents</a></li>
-                <li><a href="fondements-scientifiques.html">🧬 Fondements</a></li>
-                <li><a href="ressources-hub.html">🗂️ Ressources</a></li>
-                <li><a href="#transformation">Transformation</a></li>
-            </ul>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="assets/agenticx5-logo.png" alt="AgenticX5 Logo">
         </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Intelligence Agentique pour la SST</h1>
-            <p class="hero-subtitle">
-                Plateforme d'intelligence agentique révolutionnaire avec <strong>122+ agents IA orchestrés</strong> 
-                pour transformer la santé, sécurité et environnement au travail. Architecture WAVE 4, 
-                prédictions 94.7% de précision.
-            </p>
-            <div class="hero-cta">
-                <a href="#applications" class="btn btn--primary">Découvrir les Applications</a>
-                <a href="#architecture" class="btn btn--ghost">Architecture WAVE 4</a>
-            </div>
+        <div class="logo-text">
+          <h1>NudgeSafe Hands™</h1>
+          <p class="tagline">AgenticX5 Ecosystem</p>
         </div>
-    </section>
+      </div>
 
-    <!-- APPLICATIONS SAAS -->
-    <section id="applications">
-        <div class="section-header">
-            <span class="section-badge">🚀 Écosystème SaaS</span>
-            <h2 class="section-title">9 Applications Déployées</h2>
-            <p class="section-subtitle">
-                Suite complète d'applications agentiques pour tous vos besoins HSE
-            </p>
+      <h2 class="hero-title">Plateforme d'Intelligence Artificielle Comportementale<br>pour la Sécurité des Mains</h2>
+      <p class="hero-subtitle">Réduire les blessures de 83% grâce aux nudges adaptatifs</p>
+
+      <div class="badges">
+        <span class="badge">Version 1.0.0</span>
+        <span class="badge green">Production Ready</span>
+        <span class="badge">ISO 45001</span>
+        <span class="badge">OSHA/CNESST</span>
+        <span class="badge">MIT License</span>
+      </div>
+    </header>
+
+    <!-- Applications -->
+    <div class="apps-grid">
+      <!-- App 1: Glove Selector -->
+      <div class="app-card" onclick="location.href='src/app/ax5-safenudge-glove-selector.html'">
+        <div class="app-icon">🧤</div>
+        <h3 class="app-title">GenAISafety</h3>
+        <p class="app-subtitle">Sélecteur de Gants Intelligent</p>
+        <p class="app-description">
+          Recommandation instantanée du gant approprié selon le produit chimique. Base de données 15+ produits avec temps de percée validés.
+        </p>
+        <div class="app-features">
+          <div class="feature-item">Analyse en temps réel (&lt;1 seconde)</div>
+          <div class="feature-item">Nudges adaptatifs comportementaux</div>
+          <div class="feature-item">Standards OSHA/EN 374 intégrés</div>
+          <div class="feature-item">Interface multilingue</div>
         </div>
+        <a href="src/app/ax5-safenudge-glove-selector.html" class="app-link">
+          Lancer l'application →
+        </a>
+      </div>
 
-        <div class="grid grid--3">
-            <!-- App 1: Hub AgenticX5 -->
-            <div class="card">
-                <div class="card-icon">🏛️</div>
-                <h3 class="card-title">Hub AgenticX5</h3>
-                <p class="card-description">
-                    Portail central unifiant toutes les applications agentiques. Orchestration intelligente 
-                    des 122+ agents IA.
-                </p>
-                <span class="badge badge--info">Hub Central</span>
-                <a href="https://agenticx5-web-portal.netlify.app" target="_blank" class="card-link">
-                    Accéder au Hub →
-                </a>
-            </div>
-
-            <!-- App 2: IGNITIA -->
-            <div class="card">
-                <div class="card-icon">💡</div>
-                <h3 class="card-title">IGNITIA</h3>
-                <p class="card-description">
-                    Générateur d'idées SST par IA. Créativité augmentée pour innovation en prévention.
-                </p>
-                <span class="badge badge--safe">Créativité IA</span>
-                <a href="https://ignitia-safety-agentic.netlify.app" target="_blank" class="card-link">
-                    Lancer IGNITIA →
-                </a>
-            </div>
-
-            <!-- App 3: SafetyAI Pro -->
-            <div class="card">
-                <div class="card-icon">📊</div>
-                <h3 class="card-title">SafetyAI Pro</h3>
-                <p class="card-description">
-                    Dashboard HSE Enterprise. Analytics avancés, tableaux de bord temps réel, reporting automatisé.
-                </p>
-                <span class="badge badge--info">Analytics</span>
-                <a href="https://safetyai-pro-demo.netlify.app" target="_blank" class="card-link">
-                    Voir Dashboard →
-                </a>
-            </div>
-
-            <!-- App 4: AgenticSST Quebec -->
-            <div class="card">
-                <div class="card-icon">🍁</div>
-                <h3 class="card-title">AgenticSST Quebec</h3>
-                <p class="card-description">
-                    Conformité CNESST automatisée. Diagnostic LMRSST, générateur PPAI, assistant vocal.
-                </p>
-                <span class="badge badge--safe">Conformité CNESST</span>
-                <a href="https://agentic-sst-quebec-demo.netlify.app" target="_blank" class="card-link">
-                    Accéder →
-                </a>
-            </div>
-
-            <!-- App 5: SafetyGraph -->
-            <div class="card">
-                <div class="card-icon">🔮</div>
-                <h3 class="card-title">SafetyGraph</h3>
-                <p class="card-description">
-                    Knowledge Graph HSE. Ontologie complète, Neo4j, analytics prédictifs, BehaviorX.
-                </p>
-                <span class="badge badge--info">Knowledge Graph</span>
-                <a href="https://safetygraph-demo.netlify.app" target="_blank" class="card-link">
-                    Explorer →
-                </a>
-            </div>
-
-            <!-- App 6: PrudenceAI -->
-            <div class="card">
-                <div class="card-icon">🚗</div>
-                <h3 class="card-title">PrudenceAI</h3>
-                <p class="card-description">
-                    Sécurité routière chantiers. Prévention accidents, analyse comportements conducteurs.
-                </p>
-                <span class="badge badge--safe">Sécurité Routière</span>
-                <a href="https://prudence-ai-demo.netlify.app" target="_blank" class="card-link">
-                    Découvrir →
-                </a>
-            </div>
-
-            <!-- App 7: SquadrAI ClimAlert -->
-            <div class="card">
-                <div class="card-icon">🌡️</div>
-                <h3 class="card-title">SquadrAI ClimAlert</h3>
-                <p class="card-description">
-                    Surveillance climatique temps réel. Alertes météo, stress thermique, prévention canicule.
-                </p>
-                <span class="badge badge--info">Météo HSE</span>
-                <a href="https://squadrai-climalert-demo.netlify.app" target="_blank" class="card-link">
-                    Voir Alertes →
-                </a>
-            </div>
-
-            <!-- App 8: HSE Human X -->
-            <div class="card">
-                <div class="card-icon">👤</div>
-                <h3 class="card-title">HSE Human X</h3>
-                <p class="card-description">
-                    Facteurs humains augmentés. BehaviorX, analyse culture 7D, engagement travailleurs.
-                </p>
-                <span class="badge badge--safe">Facteurs Humains</span>
-                <a href="https://hse-human-x-demo.netlify.app" target="_blank" class="card-link">
-                    Explorer →
-                </a>
-            </div>
-
-            <!-- App 9: MutuelleAI Pro -->
-            <div class="card">
-                <div class="card-icon">🏥</div>
-                <h3 class="card-title">MutuelleAI Pro</h3>
-                <p class="card-description">
-                    Gestion mutuelles SST par IA. Optimisation cotisations, prévention sinistres, analytics.
-                </p>
-                <span class="badge badge--info">Mutuelles</span>
-                <a href="https://mutuelleai-pro-demo.netlify.app" target="_blank" class="card-link">
-                    Accéder →
-                </a>
-            </div>
+      <!-- App 2: Dashboard -->
+      <div class="app-card" onclick="location.href='src/app/ax5-safenudge-dashboard.html'">
+        <div class="app-icon">📊</div>
+        <h3 class="app-title">NudgeSafe Dashboard</h3>
+        <p class="app-subtitle">Surveillance Temps Réel</p>
+        <p class="app-description">
+          Dashboard superviseur avec monitoring 4 zones, prédictions 72h, et orchestration de 4 agents IA AgenticX5.
+        </p>
+        <div class="app-features">
+          <div class="feature-item">KPIs temps réel (score sécurité, conformité)</div>
+          <div class="feature-item">AI prédictive (HandRiskPredictor)</div>
+          <div class="feature-item">Historique nudges + efficacité</div>
+          <div class="feature-item">Human-in-the-Loop activé</div>
         </div>
-    </section>
+        <a href="src/app/ax5-safenudge-dashboard.html" class="app-link">
+          Voir le dashboard →
+        </a>
+      </div>
 
-    <!-- ARCHITECTURE WAVE 4 -->
-    <section id="architecture" style="background: rgba(26, 18, 39, 0.3);">
-        <div class="section-header">
-            <span class="section-badge">🏗️ Architecture</span>
-            <h2 class="section-title">WAVE 4 : 122+ Agents Orchestrés</h2>
-            <p class="section-subtitle">
-                Architecture révolutionnaire en 5 couches pour intelligence agentique complète
-            </p>
+      <!-- App 3: Presentation -->
+      <div class="app-card" onclick="location.href='src/app/ax5-safenudge-presentation.html'">
+        <div class="app-icon">📽️</div>
+        <h3 class="app-title">Executive Presentation</h3>
+        <p class="app-subtitle">Présentation Stratégique</p>
+        <p class="app-description">
+          12 slides professionnels couvrant théorie du nudge, architecture 5 niveaux, conformité réglementaire et ROI déploiement.
+        </p>
+        <div class="app-features">
+          <div class="feature-item">Fondements scientifiques (Thaler, Kahneman)</div>
+          <div class="feature-item">Standards ISO 45001/OSHA/CNESST</div>
+          <div class="feature-item">Cas d'usage industriels validés</div>
+          <div class="feature-item">Roadmap 18 mois détaillée</div>
         </div>
+        <a href="src/app/ax5-safenudge-presentation.html" class="app-link">
+          Ouvrir présentation →
+        </a>
+      </div>
+    </div>
 
-        <div class="grid grid--2">
-            <div class="card">
-                <h3 class="card-title">🔷 Couche 1 : Sources de Données</h3>
-                <p class="card-description">
-                    <strong>32 agents</strong> de capture multi-sources : Vision (caméras), IoT (capteurs), 
-                    Documents (PDF/Excel), Météo (API), Planning (calendriers).
-                </p>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">⚙️ Couche 2 : Traitement</h3>
-                <p class="card-description">
-                    <strong>28 agents</strong> de normalisation : Nettoyage, validation, enrichissement, 
-                    feature engineering, qualité données.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">🧠 Couche 3 : Intelligence</h3>
-                <p class="card-description">
-                    <strong>35 agents</strong> d'analyse avancée : ML prédictif, NLP, Computer Vision, 
-                    Pattern Recognition, Anomaly Detection.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">🎯 Couche 4 : Décision</h3>
-                <p class="card-description">
-                    <strong>18 agents</strong> de recommandation : Priorisation risques, scoring, 
-                    scénarios optimaux, aide décision contextuelle.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">⚡ Couche 5 : Action</h3>
-                <p class="card-description">
-                    <strong>9 agents</strong> d'exécution : Alertes automatiques, génération rapports, 
-                    création tâches, notifications intelligentes.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3 class="card-title">🔄 Orchestration</h3>
-                <p class="card-description">
-                    LangGraph pour coordination. <strong>94.7% précision</strong> prédictive. 
-                    Temps réponse < 2s.
-                </p>
-            </div>
+    <!-- Info Section -->
+    <div class="info-section">
+      <h2 class="info-title">🎯 Architecture AgenticX5 - 5 Niveaux</h2>
+      <div class="info-content">
+        <div class="info-item">
+          <div class="info-icon">📡</div>
+          <div class="info-text">
+            <h3>N1 - Collecte</h3>
+            <p>IoT, Vision IA, RFID, historique incidents, météo, production (temps réel + batch)</p>
+          </div>
         </div>
-    </section>
-
-    <!-- TRANSFORMATION -->
-    <section id="transformation">
-        <div class="section-header">
-            <span class="section-badge">📈 Transformation</span>
-            <h2 class="section-title">Du Réactif au Prédictif</h2>
-            <p class="section-subtitle">
-                Révolutionnez votre approche SST avec l'intelligence agentique
-            </p>
+        <div class="info-item">
+          <div class="info-icon">🔄</div>
+          <div class="info-text">
+            <h3>N2 - Normalisation</h3>
+            <p>Taxonomie ISO 45001, cartographie zones, matrice gants, niveaux d'alerte</p>
+          </div>
         </div>
-
-        <div class="grid grid--2">
-            <div class="card" style="border-left: 4px solid var(--color-alert);">
-                <h3 class="card-title">❌ Approche Traditionnelle</h3>
-                <ul style="list-style: none; padding: 0; color: var(--text-400);">
-                    <li style="margin-bottom: 0.5rem;">📋 Réaction après incidents</li>
-                    <li style="margin-bottom: 0.5rem;">📊 Rapports manuels laborieux</li>
-                    <li style="margin-bottom: 0.5rem;">⏰ Délais de traitement longs</li>
-                    <li style="margin-bottom: 0.5rem;">👥 Gestion cloisonnée</li>
-                    <li style="margin-bottom: 0.5rem;">📈 Métriques limitées</li>
-                </ul>
-            </div>
-
-            <div class="card" style="border-left: 4px solid var(--color-safe);">
-                <h3 class="card-title">✅ Avec AgenticX5</h3>
-                <ul style="list-style: none; padding: 0; color: var(--text-400);">
-                    <li style="margin-bottom: 0.5rem;">🔮 Prédiction 7/30/90 jours</li>
-                    <li style="margin-bottom: 0.5rem;">⚡ Automatisation complète</li>
-                    <li style="margin-bottom: 0.5rem;">⏱️ Temps réel < 2 secondes</li>
-                    <li style="margin-bottom: 0.5rem;">🤝 Orchestration intelligente</li>
-                    <li style="margin-bottom: 0.5rem;">📊 Analytics 360° continus</li>
-                </ul>
-            </div>
+        <div class="info-item">
+          <div class="info-icon">🧠</div>
+          <div class="info-text">
+            <h3>N3 - Analyse IA</h3>
+            <p>Scoring zones, prédiction 72h (Random Forest), détection non-port, A/B testing</p>
+          </div>
         </div>
-    </section>
+        <div class="info-item">
+          <div class="info-icon">⚡</div>
+          <div class="info-text">
+            <h3>N4 - Recommandations</h3>
+            <p>Nudges personnalisés (type + canal + intensité), escalade automatique, HITL</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🤖</div>
+          <div class="info-text">
+            <h3>N5 - Orchestration</h3>
+            <p>4 agents IA: NudgeOrchestrator, HandRiskPredictor, EffectivenessTracker, ComplianceReporter</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- FOOTER -->
+    <!-- Links Section -->
+    <div class="links-section">
+      <a href="https://github.com/Preventera/NudgeSafe-Hands" target="_blank" class="link-card">
+        <div class="link-icon">📦</div>
+        <div class="link-title">GitHub Repository</div>
+        <div class="link-subtitle">Code source & documentation</div>
+      </a>
+
+      <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/README.md" target="_blank" class="link-card">
+        <div class="link-icon">📚</div>
+        <div class="link-title">Documentation</div>
+        <div class="link-subtitle">Guides complets & API</div>
+      </a>
+
+      <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/QUICK_START.md" target="_blank" class="link-card">
+        <div class="link-icon">🚀</div>
+        <div class="link-title">Quick Start</div>
+        <div class="link-subtitle">Démarrage 5 minutes</div>
+      </a>
+
+      <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/deployment/deployment-scenarios-ax5.md" target="_blank" class="link-card">
+        <div class="link-icon">🏭</div>
+        <div class="link-title">Cas d'Usage</div>
+        <div class="link-subtitle">4 scénarios industriels</div>
+      </a>
+
+      <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/docs/compliance/compliance-standards-ax5.md" target="_blank" class="link-card">
+        <div class="link-icon">✅</div>
+        <div class="link-title">Conformité</div>
+        <div class="link-subtitle">ISO 45001, OSHA, CNESST</div>
+      </a>
+
+      <a href="https://preventera.ca" target="_blank" class="link-card">
+        <div class="link-icon">🌐</div>
+        <div class="link-title">Preventera Inc.</div>
+        <div class="link-subtitle">Site corporatif</div>
+      </a>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://preventera.online">Preventera</a>
-                <a href="https://genaisafety.online">GenAISafety</a>
-                <a href="https://agenticx5-web-portal.netlify.app">Hub AgenticX5</a>
-                <a href="https://docs.claude.com">Documentation</a>
-            </div>
-            <p class="footer-copyright">
-                © 2025 GenAISafety-AgenticX5 | Powered by Preventera
-            </p>
-        </div>
+      <div class="footer-content">
+        © 2025 Preventera Inc. / AgenticX5 Ecosystem • NudgeSafe Hands™ • AX5-SafeNudge™<br>
+        Contact: <a href="mailto:team@agenticx5.com" style="color: var(--primary); text-decoration: none;">team@agenticx5.com</a>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/LICENSE" target="_blank">MIT License</a>
+        <a href="https://github.com/Preventera/NudgeSafe-Hands/blob/main/CONTRIBUTING.md" target="_blank">Contribute</a>
+        <a href="https://github.com/Preventera/NudgeSafe-Hands/issues" target="_blank">Issues</a>
+        <a href="https://github.com/Preventera/NudgeSafe-Hands/releases" target="_blank">Releases</a>
+      </div>
     </footer>
-
-    <!-- JAVASCRIPT -->
-    <script>
-        // Navigation scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card, section > *').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Console branding
-        console.log('%c🚀 AgenticX5 Landing', 'color: #7c4dff; font-size: 20px; font-weight: bold;');
-        console.log('%cGenAISafety × Preventera', 'color: #9b93ad; font-size: 12px;');
-    </script>
+  </div>
 </body>
 </html>
