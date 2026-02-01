@@ -73,9 +73,9 @@ console.log(result.nudge.message);
 ### Option 3: API REST
 
 ```bash
-curl -X POST https://api.safenudge.com/v1/analyze \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
+curl -X POST https://api.safenudge.com/v1/analyze \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
   -d '{
     "chemical": {"name": "acétone", "cas": "67-64-1"},
     "exposure": {"duration_minutes": 45},
@@ -95,11 +95,20 @@ AX5-SafeNudge/
 │   ├── dashboard/                    # Dashboard superviseur temps réel
 │   └── presentation/                 # Slides exécutives
 │
+├── 🐍 backend/                       # Backend Python (NEW!)
+│   ├── src/
+│   │   ├── clients/                  # SafetyGraph Neo4j client
+│   │   ├── models/                   # Pydantic models
+│   │   ├── api/                      # API REST (Sprint 1+)
+│   │   └── agents/                   # AI Agents (Sprint 2)
+│   ├── tests/                        # 15 unit tests (100% pass)
+│   └── demo.py                       # Interactive demo
+│
 ├── 🗄️ data/                          # Bases de données
 │   ├── chemicals/                    # 15 produits chimiques documentés
 │   └── gloves/                       # 8 matériaux EPI
 │
-├── 🔧 src/                           # Code source
+├── 🔧 src/                           # Code source frontend
 │   ├── parser/                       # Parser FDS Python
 │   ├── api/                          # API REST Node.js
 │   └── core/                         # Logic métier
@@ -124,6 +133,111 @@ AX5-SafeNudge/
 
 ---
 
+## 🐍 Backend Python
+
+### Vue d'Ensemble
+
+Le backend Python intègre **SafetyGraph Core** (Neo4j) pour l'analyse comportementale des incidents mains et la génération de nudges prédictifs.
+
+**Features Sprint 1 ✅**
+- ✅ Connexion Neo4j (client + mode mock)
+- ✅ 4 queries Cypher principales
+- ✅ Modèles Pydantic (HandIncident, ZoneRiskScore, WorkerTraining, NearMiss)
+- ✅ 15 tests unitaires (100% pass, 72% coverage)
+- ✅ Documentation complète
+
+### Installation Rapide
+
+```bash
+# Naviguer vers le backend
+cd backend
+
+# Créer environnement virtuel
+python -m venv .venv
+
+# Activer (Windows)
+.venv\\Scripts\\activate
+
+# Activer (Linux/Mac)
+source .venv/bin/activate
+
+# Installer dépendances
+pip install -r requirements.txt
+
+# Configurer
+cp .env.example .env
+# Éditer .env: MOCK_MODE=true (ou false si Neo4j disponible)
+
+# Tester
+python demo.py
+```
+
+### Utilisation
+
+```python
+from src.clients.safetygraph_client import SafetyGraphClient
+
+# Mode Mock (sans Neo4j)
+client = SafetyGraphClient(mock_mode=True)
+
+# Récupérer incidents mains
+incidents = client.get_hand_incidents(limit=10)
+print(f"Trouvés: {len(incidents)} incidents")
+
+# Calculer scores risque zones
+scores = client.get_zone_risk_scores()
+for score in scores:
+    print(f"{score.zone_id}: {score.score}/100 ({score.niveau})")
+
+# Context manager automatique
+with SafetyGraphClient(mock_mode=True) as client:
+    near_miss = client.get_near_miss_events(days=7)
+    print(f"{len(near_miss)} near-miss cette semaine")
+```
+
+### Tests
+
+```bash
+# Lancer tous les tests
+pytest -v
+
+# Avec couverture
+pytest --cov=src --cov-report=html
+
+# Tests spécifiques
+pytest tests/test_safetygraph_client.py::TestSafetyGraphClientMock -v
+```
+
+### Documentation Complète
+
+📖 **[Backend README](backend/README.md)** — Documentation technique détaillée
+
+**Guides:**
+- [Integration Guide](backend/INTEGRATION-GUIDE.md) — Setup développeur
+- [API Reference](backend/README.md#api-reference) — Référence complète
+- [SafetyGraph Core](https://github.com/Preventera/safetygraph-core) — Repo Neo4j
+
+### Roadmap Backend
+
+**Sprint 1 ✅** (Actuel)
+- Connexion SafetyGraph
+- Queries Cypher validées
+- Mode mock développement
+
+**Sprint 1+ 🚧** (2 semaines)
+- API REST FastAPI
+- Endpoints \`/api/v1/*\`
+- Swagger UI auto-doc
+- CORS + Rate limiting
+
+**Sprint 2 📅** (1 mois)
+- Feature engineering
+- Random Forest training
+- A/B testing framework
+- Agent NudgeEffectivenessTracker
+
+---
+
 ## 🛠️ Technologies
 
 **Frontend:**
@@ -132,8 +246,12 @@ AX5-SafeNudge/
 - Lucide Icons
 
 **Backend:**
-- Python 3.8+ (Parser FDS)
-- Node.js 16+ (API REST)
+- Python 3.11+ (SafetyGraph client)
+- Neo4j 5.x (Graph database)
+- Pydantic 2.x (Validation)
+- pytest (Testing)
+- FastAPI (API REST - Sprint 1+)
+- Node.js 16+ (Legacy API)
 - PostgreSQL (Base de données)
 
 **IA & ML:**
@@ -156,6 +274,7 @@ AX5-SafeNudge/
 - **[Guide Développeur](docs/developer-guide.md)** — Intégration technique
 - **[Référence API](docs/api-reference.md)** — Documentation API complète
 - **[Guide Déploiement](docs/deployment-guide.md)** — Installation production
+- **[Backend README](backend/README.md)** — Documentation backend Python
 
 ### Formation
 
@@ -208,16 +327,22 @@ Nous accueillons les contributions! Voir [CONTRIBUTING.md](CONTRIBUTING.md) pour
 git clone https://github.com/Preventera/NudgeSafe-Hands.git
 cd NudgeSafe-Hands
 
-# Installer dépendances
+# Installer dépendances frontend
 npm install
+
+# Installer dépendances backend
+cd backend
+python -m venv .venv
+source .venv/bin/activate  # ou .venv\\Scripts\\activate sur Windows
 pip install -r requirements.txt
+cd ..
 
 # Lancer en mode dev
 npm run dev
 
 # Tests
 npm test
-pytest
+cd backend && pytest
 ```
 
 ---
@@ -240,20 +365,24 @@ pytest
 
 ### Version 1.0 (Actuelle) ✅
 - Application web standalone
+- Backend Python + SafetyGraph
 - 15 produits chimiques
 - Parser FDS manuel
 - API REST 6 endpoints
 - Dashboard superviseur
+- 15 tests unitaires backend
 
 ### Version 1.5 (Q2 2025) 🚧
 - 50+ produits chimiques
 - Parser FDS automatique (OCR + NLP)
+- API REST FastAPI complète
 - Mode hors ligne
 - App mobile native (iOS/Android)
 - Multi-langues (FR/EN/ES)
 
 ### Version 2.0 (Q3 2025) 📅
 - Machine Learning continu
+- Agents IA AgenticX5 (4 agents)
 - Intégration ERP (SAP, Oracle)
 - Multi-sites orchestration
 - Chatbot IA conversationnel
